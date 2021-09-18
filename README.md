@@ -11,3 +11,5 @@ Repositorio para el proyecto del Ciclo3 Misión TIC UdeA
 <li>Santiago Marulanda Meza</li>
 <li>Wilmer Alvarez Alvarez</li>
 <li>Giovanni Galindo</li>
+
+<li>Este commit ha sido realizado desde su computadora y actualizado a través del sistema GIT por Roland Ortega</li>
