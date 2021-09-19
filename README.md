@@ -7,7 +7,7 @@ Repositorio para el proyecto del Ciclo3 Misión TIC UdeA
 <h2>Integrantes</h2>
 
 <li>Roland Andrés Ortega Ayala</li>
-<li>Diego F Montealegre Silva</li>
+<li>Diego Francisco Montealegre Silva</li>
 <li>Santiago Marulanda Meza</li>
 <li>Wilmer Alvarez Alvarez</li>
 <li>Giovanni Galindo</li>
