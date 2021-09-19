@@ -13,3 +13,6 @@ Repositorio para el proyecto del Ciclo3 Misión TIC UdeA
 <li>Giovanni Galindo</li>
 
 <li>Este commit ha sido realizado desde su computadora y actualizado a través del sistema GIT por Roland Ortega</li>
+
+<h3> Commit desde Git - Giovanni Galindo </h3>
+
