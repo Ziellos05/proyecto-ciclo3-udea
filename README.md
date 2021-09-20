@@ -16,4 +16,5 @@ Repositorio para el proyecto del Ciclo3 Misión TIC UdeA
 
 <h3> Commit desde Git - Giovanni Galindo </h3>
 <h3> Commit desde Git - Santiago Marulanda Meza</h3>
+<h3> Commit desde Git - Wilmer Alvarez </h3>
 
