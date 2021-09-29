@@ -26,6 +26,7 @@ const LoginScreen = () => {
   return (
     <div>
       <h1>LoginScreen</h1>
+      <h1>A cardo de: Santiago Marulanda</h1>
       <Button variant="success" onClick={onPressLogIn} >Ingresar</Button>
     </div>
   );
