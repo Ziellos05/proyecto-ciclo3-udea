@@ -7,8 +7,8 @@ import SalesScreen from './screens/sales/SalesScreen';
 const App = () => {
   return (
     <ContextProvider>
-      {/* <AppContainer /> */}
-      <SalesScreen />
+      <AppContainer />
+      {/* <SalesScreen /> */}
     </ContextProvider>
   );
 }
