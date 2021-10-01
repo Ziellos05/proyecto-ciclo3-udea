@@ -8,7 +8,6 @@ const App = () => {
   return (
     <ContextProvider>
       <AppContainer />
-      {/* <SalesScreen /> */}
     </ContextProvider>
   );
 }
