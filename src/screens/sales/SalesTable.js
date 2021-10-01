@@ -6,8 +6,7 @@ const SalesTable = () => {
     return(
         <div>
         <Row>
-          <Col sm={4}></Col>
-          <Col sm={8}>
+          <Col>
             <Table striped bordered hover size="sm">
               <thead>
                 <tr>
