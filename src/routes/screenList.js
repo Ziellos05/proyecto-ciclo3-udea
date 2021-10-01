@@ -2,6 +2,7 @@ import HomeScreen from '../screens/home/HomeScreen';
 import LoginScreen from "../screens/login/LoginScreen";
 import ProductsScreen from "../screens/products/ProductsScreen";
 import SalesScreen from "../screens/sales/SalesScreen";
+import RegisterSaleScreen from '../screens/register-sale/RegisterSaleScreen';
 import UserProfileScreen from "../screens/userProfile/UserProfileScreen";
 
 export const publicListScreen = [
@@ -34,6 +35,13 @@ export const privateListScreen = [
         path: '/ventas',
         component: <SalesScreen />,
         name: 'Ventas',
+        //icon: <MenuBookIcon />,
+    },
+    {
+        id: 'Registrar-Venta',
+        path: '/registrar-venta',
+        component: <RegisterSaleScreen />,
+        name: 'Registrar Venta',
         //icon: <MenuBookIcon />,
     },
     {
