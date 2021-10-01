@@ -16,9 +16,6 @@ const SalesScreen = () => {
         <br />
         <Row>
         <Col className={styles.center}><CurrentDate /></Col>
-        <Col className={styles.center}>
-          <Vendedores />
-        </Col>
         </Row>
         <br />
         <Row>
@@ -35,6 +32,9 @@ const SalesScreen = () => {
                 <Form.Control type="text" placeholder="Documento Cliente" sytle={styles.center}/>
               </Form.Group>
             </Form>
+          </Col>
+          <Col className={styles.center}>
+            <Vendedores />
           </Col>
         </Row>
         <SalesTable />
