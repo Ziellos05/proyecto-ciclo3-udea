@@ -1,53 +1,79 @@
+import React from 'react';
 import styles from './Styles.module.css';
-import CurrentDate from './CurrentDate';
-import SalesTable from './SalesTable';
-import Vendedores from './Vendedores';
-import { Container, Row, Col, Form, Button} from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import { Container, Row, Col } from 'react-bootstrap';
+import Button from "react-bootstrap/Button";
+import FormControl from "react-bootstrap/FormControl";
+import Table from "react-bootstrap/Table";
 
 
 const SalesScreen = () => {
   return (
     <div>
-
       <Container>
         <Row>
-          <Col className={styles.center}><h2>Registro de Venta</h2> </Col>
-        </Row> 
-        <br />
-        <Row>
-        <Col className={styles.center}><CurrentDate /></Col>
-        </Row>
-        <br />
-        <Row>
-          <Col sm={4}>
+          <Col sm={6}>
+            <h2>Maestro de Ventas</h2>
+          </Col>
+          <Col sm={6}>
             <Form>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Control type="text" placeholder="Nombre de cliente" sytle={styles.right}/>
+              <Form.Group className={styles.inlineBlock} controlId="floatingInputGrid">
+                  <Form.Control typeof="number" placeholder="🔍Buscar"/>
+                  <Button variant="success">Buscar</Button>
               </Form.Group>
             </Form>
           </Col>
-          <Col sm={4}>
-            <Form>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Control type="text" placeholder="Documento Cliente" sytle={styles.center}/>
-              </Form.Group>
-            </Form>
-          </Col>
-          <Col className={styles.center}>
-            <Vendedores />
-          </Col>
+          {/* <Col sm={1}></Col> */}
         </Row>
-        <SalesTable />
+        <br />
         <br />
         <Row>
-          <Col sm="8"></Col>
-          <Col sm="4">
-          <Button variant="primary">Registrar venta</Button>{' '}
-          <Button variant="danger">Cancelar</Button>{' '}
+          <Col>
+            <Table striped bordered hover size="sm" className={styles.center}>
+              <thead>
+                <tr>
+                  <th>ID Venta</th>
+                  <th>Vendedor</th>
+                  <th>Total Venta</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>####</td>
+                  <td>Vendedor 1</td>
+                  <td className={styles.right}>$$$</td>
+                  <td>En proceso</td>
+                  <td >🖊️ 👁️</td>
+                </tr>
+                <tr>
+                  <td>####</td>
+                  <td>Vendedor 2</td>
+                  <td className={styles.right}>$$$</td>
+                  <td>Entregada</td>
+                  <td>🖊️ 👁️</td>
+                </tr>
+                <tr>
+                  <td>####</td>
+                  <td>Vendedor 3</td>
+                  <td className={styles.right}>$$$</td>
+                  <td>Entregada</td>
+                  <td >🖊️ 👁️</td>
+                </tr>
+                <tr>
+                  <td>####</td>
+                  <td>Vendedor 4</td>
+                  <td className={styles.right}>$$$</td>
+                  <td>Cancelada</td>
+                  <td >🖊️ 👁️</td>
+                </tr>
+              </tbody>
+            </Table>
           </Col>
         </Row>
-
       </Container>
+
     </div>
   );
 };
