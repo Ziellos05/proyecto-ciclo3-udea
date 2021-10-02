@@ -1,52 +1,37 @@
+import React from 'react';
 import styles from './Styles.module.css';
-import CurrentDate from './CurrentDate';
-import SalesTable from './SalesTable';
-import Vendedores from './Vendedores';
-import { Container, Row, Col, Form, Button} from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import { Container, Row, Col } from 'react-bootstrap';
+import Button from "react-bootstrap/Button";
+import ReporteVentas from './ReporteVentas';
+import Table from "react-bootstrap/Table";
+import { listaVentas } from '../../utilities/listaVentas';
 
 
 const SalesScreen = () => {
   return (
     <div>
-
       <Container>
         <Row>
-          <Col className={styles.center}><h2>Registro de Venta</h2> </Col>
-        </Row> 
-        <br />
-        <Row>
-        <Col className={styles.center}><CurrentDate /></Col>
-        <Col className={styles.center}>
-          <Vendedores />
-        </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col sm={4}>
-            <Form>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Control type="text" placeholder="Nombre de cliente" sytle={styles.right}/>
-              </Form.Group>
-            </Form>
+          <Col sm={6}>
+            <h2>Maestro de Ventas</h2>
           </Col>
-          <Col sm={4}>
+          <Col sm={6}>
             <Form>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Control type="text" placeholder="Documento Cliente" sytle={styles.center}/>
+              <Form.Group className={styles.inlineBlock} controlId="floatingInputGrid">
+                  <Form.Control typeof="number" placeholder="🔍Buscar"/>
+                  {/* <Button variant="success">Buscar</Button> */}
               </Form.Group>
             </Form>
           </Col>
         </Row>
-        <SalesTable />
+        <br />
         <br />
         <Row>
-          <Col sm="8"></Col>
-          <Col sm="4">
-          <Button variant="primary">Registrar venta</Button>{' '}
-          <Button variant="danger">Cancelar</Button>{' '}
+          <Col>
+            <ReporteVentas />
           </Col>
         </Row>
-
       </Container>
     </div>
   );
