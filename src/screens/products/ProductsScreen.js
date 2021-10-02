@@ -1,11 +1,11 @@
 import React from 'react';
-
+import ProductMaster from './components/ProductMaster';
 
 const ProductsScreen = () => {
   return (
-    <div>
-      <h1>ProductsScreen</h1>
-      <h1>A cardo de: Giovanni</h1>      
+    <div className = "container mt-5">
+      <h2>Maestro de Productos</h2>
+      <ProductMaster/>  
     </div>
   );
 };
