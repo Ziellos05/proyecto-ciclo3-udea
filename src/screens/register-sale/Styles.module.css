@@ -1,0 +1,29 @@
+/* ALIGNS */
+.center {
+    align-items: center;
+    /* margin-top: 1em; */
+    text-align: center;
+}
+
+.right {
+    align-items: end;
+    /* margin-top: 1em; */
+    text-align: end;
+}
+
+/* MARGINS */
+.margin1 {
+    margin: 1em;
+}
+
+.margin2 {
+    margin: 2em;
+}
+
+.margin3 {
+    margin: 3em;
+}
+
+.inlineBlock {
+    display: inline-block;
+}
