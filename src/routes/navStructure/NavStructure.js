@@ -27,8 +27,8 @@ const NavStructure = ({ setAuthState }) => {
 
   return (
     <>
-      <TopBar />
-      <Offcanvas backdrop={false} show={true} className={styles.container} >
+      <TopBar />      
+      <Offcanvas backdrop={false} show={true} className={styles.container} autoFocus={false} enforceFocus={false} >
         <Offcanvas.Header>
           <Image src={logo} roundedCircle />
         </Offcanvas.Header>
