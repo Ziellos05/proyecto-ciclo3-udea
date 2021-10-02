@@ -1,20 +1,15 @@
-import { useState } from 'react';
 import styles from './Styles.module.css';
 import CurrentDate from './CurrentDate';
 import Vendedores from './Vendedores';
 import ProductosDisplay from './ProductosDisplay';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import Button from 'react-bootstrap/Button';
 
 
 
 const RegisterSaleScreen = () => {
-
-  const [name, setName] = useState("");
 
   return (
     <div>
@@ -32,37 +27,41 @@ const RegisterSaleScreen = () => {
           <Col sm={4}>
             <Form>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Control type="text" placeholder="Nombre de cliente" />
+                <Form.Label>Nombre de cliente</Form.Label>
+                <Form.Control type="text" placeholder="Nombre de cliente"/>
               </Form.Group>
             </Form>
           </Col>
           <Col sm={4}>
             <Form>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Control type="text" placeholder="Documento Cliente" value={name} onChange={(e) => setName(e.target.value)}/>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                <Form.Label>Documento de Cliente</Form.Label>
+                <Form.Control type="text" placeholder="Documento Cliente"/>
               </Form.Group>
             </Form>
           </Col>
           <Col className={styles.center}>
+            <br />
             <Vendedores />
           </Col>
         </Row>
         <br />
         <Row>
           <Col>
-            <Form className={styles.right} sm={2}>
-              <Form.Group className="mb-6" controlId="exampleForm.ControlInput1">
+            <Form sm={2}>
+              <Form.Group controlId="exampleForm.ControlInput3">
                 <Form.Control type="text" placeholder="Cantidad"/>
               </Form.Group>
             </Form>
           </Col>
-          <Col className={styles.center} sm={6}>
+          <Col sm={5}>
             <ProductosDisplay />
           </Col>
-          <Col sm={4}>
-            <Button variant="success">Agregar Producto</Button>{' '}
+          <Col sm={3}>
+            <Button variant="success">Agregar Producto</Button>
           </Col>
         </Row>
+        <br />
         <Row>
           <Col>
             <Table striped bordered hover size="sm">

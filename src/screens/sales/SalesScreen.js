@@ -3,8 +3,9 @@ import styles from './Styles.module.css';
 import Form from 'react-bootstrap/Form';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from "react-bootstrap/Button";
-import FormControl from "react-bootstrap/FormControl";
+import ReporteVentas from './ReporteVentas';
 import Table from "react-bootstrap/Table";
+import { listaVentas } from '../../utilities/listaVentas';
 
 
 const SalesScreen = () => {
@@ -19,61 +20,19 @@ const SalesScreen = () => {
             <Form>
               <Form.Group className={styles.inlineBlock} controlId="floatingInputGrid">
                   <Form.Control typeof="number" placeholder="🔍Buscar"/>
-                  <Button variant="success">Buscar</Button>
+                  {/* <Button variant="success">Buscar</Button> */}
               </Form.Group>
             </Form>
           </Col>
-          {/* <Col sm={1}></Col> */}
         </Row>
         <br />
         <br />
         <Row>
           <Col>
-            <Table striped bordered hover size="sm" className={styles.center}>
-              <thead>
-                <tr>
-                  <th>ID Venta</th>
-                  <th>Vendedor</th>
-                  <th>Total Venta</th>
-                  <th>Estado</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>####</td>
-                  <td>Vendedor 1</td>
-                  <td className={styles.right}>$$$</td>
-                  <td>En proceso</td>
-                  <td >🖊️ 👁️</td>
-                </tr>
-                <tr>
-                  <td>####</td>
-                  <td>Vendedor 2</td>
-                  <td className={styles.right}>$$$</td>
-                  <td>Entregada</td>
-                  <td>🖊️ 👁️</td>
-                </tr>
-                <tr>
-                  <td>####</td>
-                  <td>Vendedor 3</td>
-                  <td className={styles.right}>$$$</td>
-                  <td>Entregada</td>
-                  <td >🖊️ 👁️</td>
-                </tr>
-                <tr>
-                  <td>####</td>
-                  <td>Vendedor 4</td>
-                  <td className={styles.right}>$$$</td>
-                  <td>Cancelada</td>
-                  <td >🖊️ 👁️</td>
-                </tr>
-              </tbody>
-            </Table>
+            <ReporteVentas />
           </Col>
         </Row>
       </Container>
-
     </div>
   );
 };

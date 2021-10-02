@@ -23,3 +23,7 @@
 .margin3 {
     margin: 3em;
 }
+
+.inlineBlock {
+    display: inline-block;
+}
