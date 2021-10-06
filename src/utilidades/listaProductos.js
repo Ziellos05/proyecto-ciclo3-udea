@@ -54,5 +54,24 @@ export const listaProductos = [
         name : "Manimoto",
         price : "1200",
     },
-
+    {
+        id : "12",
+        name : "Frunas",
+        price : "200",
+    },
+    {
+        id : "13",
+        name : "Doritos",
+        price : "1500",
+    },
+    {
+        id : "14",
+        name : "Jugo Hit",
+        price : "2000",
+    },
+    {
+        id : "15",
+        name : "Papás Margarita",
+        price : "1500",
+    },
 ];
