@@ -2,7 +2,7 @@ import styles from './Styles.module.css';
 import CurrentDate from './CurrentDate';
 import Vendedores from './Vendedores';
 import ProductosDisplay from './ProductosDisplay';
-import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
@@ -10,6 +10,14 @@ import Button from 'react-bootstrap/Button';
 
 
 const RegisterSaleScreen = () => {
+
+  // this.state = {
+  //   productsSeleceted: []
+  // }  
+
+  // this.onSubmit = (e) => {
+  //   e.preventDefault();
+  // }
 
   return (
     <div>
@@ -58,7 +66,7 @@ const RegisterSaleScreen = () => {
             <ProductosDisplay />
           </Col>
           <Col sm={3}>
-            <Button variant="success">Agregar Producto</Button>
+            <Button variant="success" type="submit">Agregar Producto</Button>
           </Col>
         </Row>
         <br />
