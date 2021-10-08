@@ -31,7 +31,7 @@ export default ProductosDisplay;
 // 5. Zapato colegial
 
 
-// DATA MOCK
+// DATA MOCK 
 
 // {
 // 	id:

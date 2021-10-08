@@ -1,32 +1,26 @@
 export const listaUsuarios = [
     {
-        name: "",
-        email: "",
-        rol: "",
-        status: ""
+        name: "Name1",
+        email: "email1@email.com",
+        rol: "Vendedor",
+        status: "Pendiente"
     },
     {
-        name: "",
-        email: "",
-        rol: "",
-        status: ""
+        name: "Name2",
+        email: "email2@email.com",
+        rol: "Administrador",
+        status: "Pendiente"
     },
     {
-        name: "",
-        email: "",
-        rol: "",
-        status: ""
+        name: "Name3",
+        email: "email3@email.com",
+        rol: "Vendedor",
+        status: "Pendiente"
     },
     {
-        name: "",
-        email: "",
-        rol: "",
-        status: ""
-    },
-    {
-        name: "",
-        email: "",
-        rol: "",
-        status: ""
+        name: "Name4",
+        email: "email4@email.com",
+        rol: "Vendedor",
+        status: "Pendiente"
     }
 ];
