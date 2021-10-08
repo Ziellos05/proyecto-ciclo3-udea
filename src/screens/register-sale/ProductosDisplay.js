@@ -9,19 +9,34 @@ import { listaProductos } from '../../utilities/listaProductos';
 
 const ProductosDisplay = () => {
 
-    const [value, setValue] = useState("");
-    const handleChange = (event) => {
-      console.log(event.target.value);
-      // DropdownButton.title = value;
-      // console.log(value);
+    const [newList, setNewList] = useState([]);
+    const onPressProduct = (product) => {
+      console.log('${JSON.stringify(product)}');
     }
     
     return(
       <DropdownButton id="dropdown-basic-button" title="Productos en inventario" className="mb-2">
-        {listaProductos.map((product) => (<Dropdown.Item key={product.id} value={product.name} onClick={handleChange}>{product.name}</Dropdown.Item>))}
+        {listaProductos.map((product) => (<Dropdown.Item key={product.id} value={product.name} onClick={onPressProduct}>{product.name}</Dropdown.Item>))}
       </DropdownButton>
     
     )
 }
 
 export default ProductosDisplay;
+
+// 1. Zapato hombre
+// 2. Tenis hombre
+// 3. Tacon mujer
+// 4. Tenis mujer
+// 5. Zapato colegial
+
+
+// DATA MOCK
+
+// {
+// 	id:
+// 	nombre: Zapato hombre,
+// 	valor: 50000,
+// 	descripcion: zapato de cuero negro,
+// 	estado: true | false,
+// }
