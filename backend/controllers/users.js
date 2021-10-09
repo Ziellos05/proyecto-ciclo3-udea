@@ -2,8 +2,8 @@ const User = require("../models/users");
 
 exports.getUsers = (req, res) => {
     // Llamado a la base de datos
-    User.find().then((postResult)=>{
-        res.status(200).json(postResult);
+    User.find().then((userResult)=>{
+        res.status(200).json(userResult);
     })
 
 };
@@ -18,5 +18,25 @@ exports.addUsers = (req, res) => {
 
     user.save().then((createdUser) => {
         res.status(201).json(createdUser);
+    });
+};
+
+exports.getUserByEMail = (req, res) => {
+    User.findOne({email:req.params.email}).then((userResult) => {
+        if(userResult){
+            res.status(200).json(userResult);
+        } else {
+            res.status(404).json(`Usuario no encontrado con el correo ${req.params.email}`);
+        };
+    });
+};
+
+exports.deleteUserByEMail = (req, res) => {
+    User.deleteOne({email:req.params.email}).then((deletedUser) => {
+        if(deletedUser.deletedCount === 1){
+            res.status(200).json(`El usuario con el correo ${req.params.email} ha sido borrado`);
+        } else {
+            res.status(404).json(`Usuario no encontrado con el correo ${req.params.email}`);
+        };
     })
 };

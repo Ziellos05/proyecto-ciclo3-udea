@@ -23,7 +23,7 @@ const UserProfileScreen = () => {
             <Form className="d-flex">
               <FormControl
                 type="search"
-                placeholder="Escriba nombre del usuario"
+                placeholder="Escriba correo del usuario"
                 className="mr-2"
                 aria-label="Search"
               />
