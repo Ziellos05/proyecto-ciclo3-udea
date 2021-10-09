@@ -1,4 +1,6 @@
- /** handle authentication state of a user */
+import * as InitialState from './initialState';
+
+/** handle authentication state of a user */
 export const AuthUser = (state, action) => {
     const logInUser = () => {
         return { ...state, isLoading: false, isLoggedIn: action.payload };
@@ -16,6 +18,27 @@ export const AuthUser = (state, action) => {
             return logOutUser();
         case 'OFFLINE':
             return offlineMode();			
+        default:
+            return state;
+    }
+};
+
+export const userInfo = (state, action) => {
+    
+    const setUserInfo = () => {
+        const { name, email } = action.payload;
+        return { ...state, name: name, email: email };
+    };
+
+    const cleanUserInfo = () => {
+        return { ...state, ...InitialState.userInfo};
+    }
+
+    switch (action.type) {
+        case 'LOG_IN':
+            return setUserInfo();
+        case 'LOG_OUT':
+            return cleanUserInfo();       		
         default:
             return state;
     }

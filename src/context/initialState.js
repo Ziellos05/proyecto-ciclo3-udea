@@ -4,3 +4,8 @@ export const authUser = {
     isLoading: true,
     isOffline: false 
 };
+
+export const userInfo = {
+    name: '',
+    email: '',
+};

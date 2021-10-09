@@ -9,14 +9,15 @@ import { AppContext } from '../../context/ContextProvider';
 import { GoogleLogin } from 'react-google-login';
 
 import logo from '../../logo.svg';
-import styles from './Styles.module.css';
+// import styles from './Styles.module.css';
 
+export const CLIENT_ID = "1005651371969-nf2oatsf2bvb8m4gluuahok6u5c5hihn.apps.googleusercontent.com";
 
 const LoginScreen = () => {
 
   const history = useHistory();
   const location = useLocation();
-  const { authState, setAuthState } = useContext(AppContext);
+  const { authState, setAuthState, setUser } = useContext(AppContext);
 
   const { from } = location.state || { from: { pathname: "/inicio" } };
 
@@ -24,9 +25,20 @@ const LoginScreen = () => {
     setAuthState({ type: 'LOG_IN', payload: true });
   };
 
-  const responseGoogle = (response) => {
+  // const responseGoogle = (response) => {
+  //   console.log(response);
+  // }
+
+  const onSuccessLogIn = (response) => {
     console.log(response);
-  }
+    setAuthState({ type: 'LOG_IN', payload: true });
+    setUser({ type: 'LOG_IN', payload: { name: response.profileObj?.name || 'Anónimo', email: response.profileObj?.email || '' } });
+  };
+
+  const onFailureLogIn = (response) => {
+    console.log(response);
+    alert('Ups! something happend! Try again later');
+  };
 
   useEffect(() => {
 
@@ -52,10 +64,10 @@ const LoginScreen = () => {
                 Super Ventas REACTivas, administra tus ventas y productos
               </Card.Text>
               <GoogleLogin
-                clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                clientId={CLIENT_ID}
                 buttonText="Ingresar con Google"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
+                onSuccess={onSuccessLogIn}
+                onFailure={onFailureLogIn}
                 cookiePolicy={'single_host_origin'}
               />
             </Card.Body>
@@ -63,7 +75,7 @@ const LoginScreen = () => {
         </Col>
         <Col><></></Col>
       </Row>
-  
+
     </Container>
   );
 };

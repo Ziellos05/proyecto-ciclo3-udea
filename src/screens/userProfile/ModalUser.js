@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import { listaUsuarios } from "../../utilities/listaUsuarios";
 
 function MyVerticallyCenteredModal(props) {
+  const user = props.user;
   return (
     <Modal
       {...props}
@@ -23,7 +24,7 @@ function MyVerticallyCenteredModal(props) {
         <Modal.Body>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Nombre</Form.Label>
-            <Form.Control type="email" placeholder="Pepito Perez" />
+            <Form.Control type="email" placeholder={user.name} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Correo</Form.Label>
@@ -72,8 +73,8 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
-function ModalUser() {
-  const [modalShow, setModalShow] = React.useState(false);
+function ModalUser({ user }) {
+  const [modalShow, setModalShow] = React.useState(false);  
 
   return (
     <>
@@ -82,6 +83,7 @@ function ModalUser() {
       </Button>
 
       <MyVerticallyCenteredModal
+        user={user}
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
