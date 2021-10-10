@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import logo from '../../../logo.svg';
 
-const TopBar = () => {
+const TopBar = ({ user }) => {
     return (
         <div>
             <Navbar className={styles.container} variant="dark">
@@ -23,7 +23,7 @@ const TopBar = () => {
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
-                            Registrado como: <a href="#login">Invitado</a>
+                            Registrado como: <a href="#login">{user.name}</a>
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Container>

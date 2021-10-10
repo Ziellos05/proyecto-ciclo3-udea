@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { GoogleLogout } from 'react-google-login';
 import TopBar from './topBar/TopBar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import ListGroup from 'react-bootstrap/ListGroup'
@@ -7,9 +8,10 @@ import Image from 'react-bootstrap/Image'
 import styles from './Styles.module.css';
 import { privateListScreen } from '../screenList';
 import logo from '../../logo.svg';
+import { CLIENT_ID } from '../../screens/login/LoginScreen';
 
 
-const NavStructure = ({ setAuthState }) => {
+const NavStructure = ({ setAuthState, user, setUser }) => {
 
   const history = useHistory();
   // const [show, setShow] = useState(false);
@@ -21,13 +23,22 @@ const NavStructure = ({ setAuthState }) => {
     history.push(route);
   };
 
-  const onPressLogOut = () => {
+  // const onPressLogOut = () => {
+  //   setAuthState({ type: 'LOG_OUT', payload: false });
+  // };
+
+  const onSuccessLogOut = () => {
     setAuthState({ type: 'LOG_OUT', payload: false });
+    setUser({ type: 'LOG_OUT'});
+  };
+
+  const onFailureLogOut = () => {
+    alert('Ups! an error ocurred while trying to logout!')
   };
 
   return (
     <>
-      <TopBar />      
+      <TopBar user={user} />
       <Offcanvas backdrop={false} show={true} className={styles.container} autoFocus={false} enforceFocus={false} >
         <Offcanvas.Header>
           <Image src={logo} roundedCircle />
@@ -48,14 +59,24 @@ const NavStructure = ({ setAuthState }) => {
                 );
               })
             }
-            <ListGroup.Item
+            {/* <ListGroup.Item
               action
-              variant="primary"              
+              variant="primary"
               onClick={onPressLogOut}
             >
               Cerrar Sesión
-            </ListGroup.Item>
+            </ListGroup.Item> */}
           </ListGroup>
+
+          <div style={{marginLeft:20, marginTop: 15}}>
+            <GoogleLogout
+              clientId={CLIENT_ID}
+              buttonText="Cerrar Sesión"
+              onLogoutSuccess={onSuccessLogOut}
+              onFailure={onFailureLogOut}
+            >
+            </GoogleLogout>
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
     </>
