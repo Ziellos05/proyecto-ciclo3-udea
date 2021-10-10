@@ -51,7 +51,7 @@ const UserProfileScreen = () => {
                     <td>Autorizado</td>
                     <td>{usuario.rol}</td>
                     <td>
-                      <ModalUser />
+                      <ModalUser key={usuario._id} user={usuario} />
                     </td>
                   </tr>
                 </tbody>
