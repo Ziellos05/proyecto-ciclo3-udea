@@ -1,15 +1,64 @@
+import React, {useState} from 'react';
 import styles from './Styles.module.css';
-import CurrentDate from './CurrentDate';
-import Vendedores from './Vendedores';
-import ProductosDisplay from './ProductosDisplay';
-import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
+import CurrentDate from './components/CurrentDate';
+import Vendedores from './components/Vendedores';
+import ProductosDisplay from './components/ProductosDisplay';
+import { Container, Row, Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 
 
 
 const RegisterSaleScreen = () => {
+
+  const [newList, setNewList] = useState([]);
+
+  const [totalSale, setTotalSale] = useState(0);
+
+    // ProductosDisplay state
+    const [currentProduct, setCurrentProduct] = useState({});
+
+    const onPressProduct = (product) => {
+      setCurrentProduct(product);
+       console.log("El producto seleccionado es "+product.name);
+    }
+  
+    // Vendedores state
+    const [vendedor, setVendedor] = useState("");
+  
+    const actualVendedor = (salesman) => {
+        setVendedor(salesman);
+      }
+  
+
+  // Amount of the product to push in list of products in this sale
+  const [amount, setAmount] = useState("");
+
+  const onChangeAmount = (e) => {
+    setAmount(e.target.value);
+  }
+
+  const onSubmitProduct = (product) => {
+
+    if(currentProduct.name && amount) {
+      const newProduct = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        amount: amount,
+        total: amount*product.price,
+      }
+      setTotalSale(totalSale + newProduct.total);
+      newList.push(newProduct);
+      setAmount();
+      setCurrentProduct();
+      console.log(newProduct);  
+    } else {
+      alert("No se ha seleccionado producto o introducido una cantidad");
+    }
+  }
+
 
   return (
     <div>
@@ -42,7 +91,7 @@ const RegisterSaleScreen = () => {
           </Col>
           <Col className={styles.center}>
             <br />
-            <Vendedores />
+            <Vendedores actualVendedor={actualVendedor}/>
           </Col>
         </Row>
         <br />
@@ -50,62 +99,53 @@ const RegisterSaleScreen = () => {
           <Col>
             <Form sm={2}>
               <Form.Group controlId="exampleForm.ControlInput3">
-                <Form.Control type="text" placeholder="Cantidad"/>
+                <Form.Control type="text" placeholder={amount || "Cantidad"} onChange={onChangeAmount}/>
               </Form.Group>
             </Form>
           </Col>
           <Col sm={5}>
-            <ProductosDisplay />
+            <ProductosDisplay onPressProduct={onPressProduct}/>
           </Col>
           <Col sm={3}>
-            <Button variant="success">Agregar Producto</Button>
+            <Button variant="success" type="submit" onClick={() => onSubmitProduct(currentProduct)}>Agregar Producto</Button>
           </Col>
         </Row>
         <br />
         <Row>
           <Col>
-            <Table striped bordered hover size="sm">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>ID Producto</th>
-                  <th>Producto</th>
-                  <th>Precio Unitario</th>
-                  <th>Cantidad</th>
-                  <th>Precio Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>####</td>
-                  <td>Producto 1</td>
-                  <td className={styles.right}>$$$</td>
-                  <td>####</td>
-                  <td className={styles.right}>$$$</td>
-                </tr>
-                <tr>
-                <td>2</td>
-                  <td>####</td>
-                  <td>Producto 2</td>
-                  <td className={styles.right}>$$$</td>
-                  <td>####</td>
-                  <td className={styles.right}>$$$</td>
-                </tr>
-                <tr>
-                  <td colSpan="5" className={styles.right}>Valor Total</td>
-                  <td className={styles.right}>$$$$$$</td>
-                </tr>
-              </tbody>
-            </Table>
           </Col>
         </Row>
-
+          <Table striped bordered hover size="sm">
+            <thead>
+                <tr>
+                    <th>ID Producto</th>
+                    <th>Producto</th>
+                    <th>Precio Unitario</th>
+                    <th>Cantidad</th>
+                    <th>Precio Total</th>
+                </tr>
+            </thead>
+            <tbody>
+              {newList.map((productOnList) => (
+                <tr>
+                    <td>{productOnList.id}</td>
+                    <td>{productOnList.name}</td>
+                    <td className={styles.right}>${productOnList.price}</td>
+                    <td className={styles.right}>{productOnList.amount}</td>
+                    <td className={styles.right}>${productOnList.total}</td>
+                </tr>
+              ))}
+                <tr>
+                    <td colSpan="4" className={styles.right}><h6>Valor Total</h6></td>
+                    <td className={styles.right}>${totalSale}</td>
+                </tr>
+            </tbody>
+        </Table>
         <br />
         <Row>
           <Col sm="7"></Col>
           <Col sm="5">
-          <Button variant="primary">Registrar venta</Button>{' '}
+          <Button variant="primary" >Registrar venta</Button>{' '}
           <Button variant="danger">Cancelar</Button>{' '}
           </Col>
         </Row>
