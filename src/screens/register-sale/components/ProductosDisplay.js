@@ -9,20 +9,19 @@ import { listaProductos } from '../../../utilities/listaProductos';
 
 const ProductosDisplay = ({onPressProduct}) => {
 
+  const [currentProduct, setCurrentProduct] = useState({});
 
-    const [currentProduct, setCurrentProduct] = useState({});
-
-    const onPressProductDisplay = (product) => {
-      onPressProduct(product);
-      setCurrentProduct(product);
-    }
-    
-    return(
-      <DropdownButton id="dropdown-basic-button" title={currentProduct.name || "Productos en inventario"} className="mb-2">
-        {listaProductos.map((product) => (<Dropdown.Item key={product.id} onClick={() => onPressProductDisplay(product)}>{product.name}</Dropdown.Item>))}
-      </DropdownButton>
-    
-    )
+  const onPressProductDisplay = (product) => {
+    onPressProduct(product);
+    setCurrentProduct(product);
+  }
+  
+  return(
+    <DropdownButton id="dropdown-basic-button" title={currentProduct.name || "Productos en inventario"} className="mb-2">
+      {listaProductos.map((product) => (<Dropdown.Item key={product.id} onClick={() => onPressProductDisplay(product)}>{product.name}</Dropdown.Item>))}
+    </DropdownButton>
+  
+  )
 }
 
 export default ProductosDisplay;

@@ -12,24 +12,42 @@ import Table from 'react-bootstrap/Table';
 
 const RegisterSaleScreen = () => {
 
+  // Array that contains selected products in this sale
   const [newList, setNewList] = useState([]);
 
+  // Total price in this sale
   const [totalSale, setTotalSale] = useState(0);
 
-    // ProductosDisplay state
-    const [currentProduct, setCurrentProduct] = useState({});
+  // Client state
+  const [clientName, setClientName] = useState("");
 
-    const onPressProduct = (product) => {
-      setCurrentProduct(product);
-       console.log("El producto seleccionado es "+product.name);
+  const onChangeName = (e) => {
+    setClientName(e.target.value);
+    console.log("el nombre es " + clientName)
+  }
+
+  // Client ID state
+  const[clientID, setClientID] = useState("");
+
+  const onChangeID = (e) => {
+    setClientID(e.target.value);
+    console.log("el id es " + clientID)
+  }
+
+  // ProductosDisplay state
+  const [currentProduct, setCurrentProduct] = useState({});
+
+  const onPressProduct = (product) => {
+    setCurrentProduct(product);
+     console.log("El producto seleccionado es "+product.name);
+  }
+  
+  // Vendedores state
+  const [vendedor, setVendedor] = useState("");
+  
+  const actualVendedor = (salesman) => {
+      setVendedor(salesman);
     }
-  
-    // Vendedores state
-    const [vendedor, setVendedor] = useState("");
-  
-    const actualVendedor = (salesman) => {
-        setVendedor(salesman);
-      }
   
 
   // Amount of the product to push in list of products in this sale
@@ -40,8 +58,11 @@ const RegisterSaleScreen = () => {
   }
 
   const onSubmitProduct = (product) => {
-
-    if(currentProduct.name && amount) {
+    if(!product.name) {
+      alert("No se ha seleccionado un producto");
+    } else if(!amount) {
+      alert("No se ha introducido una cantidad para el producto");
+    } else {
       const newProduct = {
         id: product.id,
         name: product.name,
@@ -54,15 +75,12 @@ const RegisterSaleScreen = () => {
       setAmount();
       setCurrentProduct();
       console.log(newProduct);  
-    } else {
-      alert("No se ha seleccionado producto o introducido una cantidad");
     }
   }
 
 
   return (
     <div>
-
       <Container>
         <Row>
           <Col className={styles.center}><h2>Registro de Venta</h2> </Col>
@@ -77,15 +95,15 @@ const RegisterSaleScreen = () => {
             <Form>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Nombre de cliente</Form.Label>
-                <Form.Control type="text" placeholder="Nombre de cliente"/>
+                <Form.Control type="text" placeholder={clientName || "Nombre de cliente"} onChange={onChangeName}/>
               </Form.Group>
             </Form>
           </Col>
           <Col sm={4}>
             <Form>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                <Form.Label>Documento de Cliente</Form.Label>
-                <Form.Control type="text" placeholder="Documento Cliente"/>
+                <Form.Label>ID de Cliente</Form.Label>
+                <Form.Control type="text" placeholder={clientID || "Documento Cliente"} onChange={onChangeID} />
               </Form.Group>
             </Form>
           </Col>
