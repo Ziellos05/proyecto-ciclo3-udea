@@ -5,7 +5,7 @@ import {DropdownButton, Dropdown} from 'react-bootstrap';
 
 const Vendedores = ({actualVendedor}) => {
 
-    const [vendedor, setVendedor] = useState("");
+    const [vendedor, setVendedor] = useState({});
 
     const onPressSalesman = (salesman) => {
         actualVendedor(salesman);
