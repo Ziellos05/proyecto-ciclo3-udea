@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styles from './Styles.module.css';
-import CurrentDate from './components/CurrentDate';
 import Vendedores from './components/Vendedores';
 import ProductosDisplay from './components/ProductosDisplay';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -12,11 +11,18 @@ import Table from 'react-bootstrap/Table';
 
 const RegisterSaleScreen = () => {
 
+  // Date
+  const current = new Date();
+  const date = `${current.getDate()}/${current.getMonth()}/${current.getFullYear()}`;
+
   // Array that contains selected products in this sale
   const [newList, setNewList] = useState([]);
 
   // Total price in this sale
   const [totalSale, setTotalSale] = useState(0);
+
+  // Status of sale, by default as 'En proceso' to send to database
+  const [saleStatus, setSaleStatus] = useState("En proceso");
 
   // Client state
   const [clientName, setClientName] = useState("");
@@ -57,6 +63,7 @@ const RegisterSaleScreen = () => {
     setAmount(e.target.value);
   }
 
+  // Push the product to newList (products in sale, an array)
   const onSubmitProduct = (product) => {
     if(!product.name) {
       alert("No se ha seleccionado un producto");
@@ -73,10 +80,16 @@ const RegisterSaleScreen = () => {
       setTotalSale(totalSale + newProduct.total);
       newList.push(newProduct);
       setAmount();
-      setCurrentProduct();
+      setCurrentProduct({});
       console.log(newProduct);  
+      console.log(newList);
     }
   }
+
+  // Set the elements object to send to database
+  // const[objectPost, setObjectPost] = useState({});
+
+  // const onSubmitSale = 
 
 
   return (
@@ -87,7 +100,7 @@ const RegisterSaleScreen = () => {
         </Row> 
         <br />
         <Row>
-        <Col className={styles.center}><CurrentDate /></Col>
+        <Col className={styles.center}><spam>FECHA DE VENTA: {date}</spam></Col>
         </Row>
         <br />
         <Row>
@@ -164,7 +177,7 @@ const RegisterSaleScreen = () => {
           <Col sm="7"></Col>
           <Col sm="5">
           <Button variant="primary" >Registrar venta</Button>{' '}
-          <Button variant="danger">Cancelar</Button>{' '}
+          <a href="/ventas"><Button variant="danger">Cancelar</Button>{' '}</a>
           </Col>
         </Row>
       </Container>

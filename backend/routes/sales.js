@@ -1,17 +1,8 @@
-var salesTable = require("../../src/utilities/listaVentas");
+const express = require("express");
+const router = express.Router();
+const salesController = require("../controllers/sales");
 
-module.exports = function (app) {
+router.get("", salesController.getSales);
+router.post("", salesController.addSale);
 
-    // API GET Request
-    // Se obtiene la tabla de ventas registradas en la base de datos
-    app.get("/api/salesTable", function(req, res) {
-        res.json(salesTable);
-    });
-
-    // API POST Request
-    // Envia nueva venta a base de datos
-    app.post("/api/salesTable", function(req, res) {
-        salesTable.push(req.body);
-        res.json(true);
-    })
-}
+module.exports = router;
