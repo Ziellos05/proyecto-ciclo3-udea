@@ -15,10 +15,10 @@ exports.addProduct = (req, res) => {
         description: req.body.description,
         statusProduct: req.body.statusProduct,
     });
-
         insertProduct.save().then((createdProduct) => {
         console.log(createdProduct);
         res.status(201).json("Registro creado correctamente");
+        
     })
     .catch((error) => {
         res.status(500).json({err: error});
