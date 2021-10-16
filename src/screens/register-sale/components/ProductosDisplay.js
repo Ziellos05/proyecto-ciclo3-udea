@@ -13,12 +13,12 @@ const ProductosDisplay = ({onPressProduct}) => {
   
   useEffect(() => {
     const fetchData = async () => {
-      const responseProducts = await api.products.list();
-      setProductsDB(responseProducts);
+      const response = await api.products.list();
+      setProductsDB(response);
       console.log(productsDB);
     };
     fetchData();
-  }, [])
+  }, []);
 
 
   // Set current 
@@ -31,14 +31,15 @@ const ProductosDisplay = ({onPressProduct}) => {
 
 
   return(
-    <DropdownButton id="dropdown-basic-button" title={currentProduct.nameProduct || "Productos en inventario"} className="mb-2">
-      {productsDB.map((product) => 
-        (<Dropdown.Item onClick={() => onPressProductDisplay(product)}>
-          {product.nameProduct}
-        </Dropdown.Item>
+    <h3>Chucha tu madre</h3>
+    // <DropdownButton id="dropdown-basic-button" title={currentProduct.nameProduct || "Productos en inventario"} className="mb-2">
+    //   {productsDB.map((product) => 
+    //     (<Dropdown.Item onClick={() => onPressProductDisplay(product)}>
+    //       {product.nameProduct}
+    //     </Dropdown.Item>
         
-      ))}
-    </DropdownButton>
+    //   ))}
+    // </DropdownButton>
   )
 }
 
