@@ -7,6 +7,7 @@ const newSale = mongoose.Schema({
     salesman: {type: String, required: true},
     totalSale: {type: Number, required: true},
     saleItems: {type: Array, required: true},
+    status: {type: String, required: true},
 });
 
 module.exports = mongoose.model("newSale", newSale);

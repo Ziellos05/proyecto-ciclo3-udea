@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import styles from './Styles.module.css';
 import Form from 'react-bootstrap/Form';
 import { Container, Row, Col } from 'react-bootstrap';
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-import { listaVentas } from '../../utilities/listaVentas';
+import api from "./components/api";
 
 
 const SalesScreen = () => {
@@ -17,6 +17,24 @@ const SalesScreen = () => {
     console.log("El item a buscar " + buscar)
   }
 
+  // Sales fetch from DB
+
+  const [sales, setSales] = useState([])
+  const [users, setUsers] = useState([])
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await api.sales.list();
+      setSales(response);
+      console.log(sales);
+      const responseUsers = await api.users.list();
+      setUsers(responseUsers);
+      console.log(users);
+    };
+
+    fetchData();
+  }, []);
+  
   return (
     <div>
       <Container>
@@ -40,7 +58,9 @@ const SalesScreen = () => {
             <Table striped bordered hover size="sm" className={styles.center}>
               <thead>
                 <tr>
-                  <th>ID Venta</th>
+                  <th>Fecha</th>
+                  <th>ID Cliente</th>
+                  <th>Cliente</th>
                   <th>Vendedor</th>
                   <th>Total Venta</th>
                   <th>Estado</th>
@@ -48,12 +68,14 @@ const SalesScreen = () => {
                 </tr>
               </thead>
               <tbody>
-                {listaVentas.map((venta) => 
+                {sales.map((venta) => 
                 (<tr>
-                  <td>{venta.idVenta}</td>
-                  <td>{venta.vendedor}</td>
-                  <td>{venta.total}</td>
-                  <td>{venta.status}</td>
+                  <td>{venta.date}</td>
+                  <td>{venta.clientID}</td>
+                  <td>{venta.clientName}</td>
+                  <td>{venta.salesman}</td>
+                  <td>${venta.totalSale}</td>
+                  <td>{venta.saleStatus}</td>
                   <td >🖊️ 👁️</td>
                 </tr>))}
               </tbody>
