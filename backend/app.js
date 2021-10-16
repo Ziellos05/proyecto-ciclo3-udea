@@ -1,6 +1,6 @@
 var express = require("express");
 var mongoose = require('mongoose');
-var cors = require("cors");
+const cors = require("cors");
 var app = express();
 
 const productsRoutes = require("./routes/products");
@@ -10,7 +10,6 @@ const salesRoutes = require("./routes/sales");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-
 
 //TODO add string to connect to db
 mongoose.connect(
