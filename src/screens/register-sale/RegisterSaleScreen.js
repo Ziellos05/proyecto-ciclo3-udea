@@ -45,7 +45,7 @@ const RegisterSaleScreen = () => {
 
   const onPressProduct = (product) => {
     setCurrentProduct(product);
-     console.log("El producto seleccionado es "+product.name);
+     console.log("El producto seleccionado es "+product.nameProduct);
   }
   
   // Vendedores state
@@ -65,17 +65,16 @@ const RegisterSaleScreen = () => {
 
   // Push the product to newList (products in sale, an array)
   const onSubmitProduct = (product) => {
-    if(!product.name) {
+    if(!product.nameProduct) {
       alert("No se ha seleccionado un producto");
     } else if(!amount) {
       alert("No se ha introducido una cantidad para el producto");
     } else {
       const newProduct = {
-        id: product.id,
-        name: product.name,
-        price: product.price,
+        name: product.nameProduct,
+        price: product.unitPrice,
         amount: amount,
-        total: amount*product.price,
+        total: amount*product.unitPrice,
       }
       setTotalSale(totalSale + newProduct.total);
       newList.push(newProduct);
@@ -85,12 +84,6 @@ const RegisterSaleScreen = () => {
       console.log(newList);
     }
   }
-
-  // Set the elements object to send to database
-  // const[objectPost, setObjectPost] = useState({});
-
-  // const onSubmitSale = 
-
 
   return (
     <div>
@@ -149,7 +142,6 @@ const RegisterSaleScreen = () => {
           <Table striped bordered hover size="sm">
             <thead>
                 <tr>
-                    <th>ID Producto</th>
                     <th>Producto</th>
                     <th>Precio Unitario</th>
                     <th>Cantidad</th>
@@ -159,7 +151,6 @@ const RegisterSaleScreen = () => {
             <tbody>
               {newList.map((productOnList) => (
                 <tr>
-                    <td>{productOnList.id}</td>
                     <td>{productOnList.name}</td>
                     <td className={styles.right}>${productOnList.price}</td>
                     <td className={styles.right}>{productOnList.amount}</td>
@@ -167,15 +158,15 @@ const RegisterSaleScreen = () => {
                 </tr>
               ))}
                 <tr>
-                    <td colSpan="4" className={styles.right}><h6>Valor Total</h6></td>
+                    <td colSpan="3" className={styles.right}><h6>Valor Total</h6></td>
                     <td className={styles.right}>${totalSale}</td>
                 </tr>
             </tbody>
         </Table>
         <br />
         <Row>
-          <Col sm="7"></Col>
-          <Col sm="5">
+          <Col sm="8"></Col>
+          <Col sm="4">
           <Button variant="primary" >Registrar venta</Button>{' '}
           <a href="/ventas"><Button variant="danger">Cancelar</Button>{' '}</a>
           </Col>
