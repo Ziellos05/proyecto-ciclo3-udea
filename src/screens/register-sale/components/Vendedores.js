@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { listaVendedores } from '../../../utilities/listaVendedores';
-
+import api from "../../../api";
 import {DropdownButton, Dropdown} from 'react-bootstrap';
 
 const Vendedores = ({actualVendedor}) => {
@@ -10,7 +10,19 @@ const Vendedores = ({actualVendedor}) => {
     const onPressSalesman = (salesman) => {
         actualVendedor(salesman);
         setVendedor(salesman);
+        console.log(vendedor)
       }
+
+      const [listaVendedores, setListaVendedores] = useState([]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          const response = await api.users.list();
+          setListaVendedores(response);
+        };
+    
+        fetchData();
+      }, []);
 
     return(
         <DropdownButton id="dropdown-basic-button" title={vendedor.name || "Vendedor"} className="mb-2">

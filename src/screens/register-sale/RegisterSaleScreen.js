@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import styles from './Styles.module.css';
 import Vendedores from './components/Vendedores';
 import ProductosDisplay from './components/ProductosDisplay';
@@ -6,6 +7,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+import api from '../../api';
 
 
 
@@ -20,9 +22,6 @@ const RegisterSaleScreen = () => {
 
   // Total price in this sale
   const [totalSale, setTotalSale] = useState(0);
-
-  // Status of sale, by default as 'En proceso' to send to database
-  const [saleStatus, setSaleStatus] = useState("En proceso");
 
   // Client state
   const [clientName, setClientName] = useState("");
@@ -45,7 +44,7 @@ const RegisterSaleScreen = () => {
 
   const onPressProduct = (product) => {
     setCurrentProduct(product);
-     console.log("El producto seleccionado es "+product.name);
+     console.log("El producto seleccionado es "+product.nameProduct);
   }
   
   // Vendedores state
@@ -55,7 +54,6 @@ const RegisterSaleScreen = () => {
       setVendedor(salesman);
     }
   
-
   // Amount of the product to push in list of products in this sale
   const [amount, setAmount] = useState("");
 
@@ -65,17 +63,16 @@ const RegisterSaleScreen = () => {
 
   // Push the product to newList (products in sale, an array)
   const onSubmitProduct = (product) => {
-    if(!product.name) {
+    if(!product.nameProduct) {
       alert("No se ha seleccionado un producto");
     } else if(!amount) {
       alert("No se ha introducido una cantidad para el producto");
     } else {
       const newProduct = {
-        id: product.id,
-        name: product.name,
-        price: product.price,
+        name: product.nameProduct,
+        price: product.unitPrice,
         amount: amount,
-        total: amount*product.price,
+        total: amount*product.unitPrice,
       }
       setTotalSale(totalSale + newProduct.total);
       newList.push(newProduct);
@@ -86,11 +83,34 @@ const RegisterSaleScreen = () => {
     }
   }
 
-  // Set the elements object to send to database
-  // const[objectPost, setObjectPost] = useState({});
+  // Sale object to post
+  const newSale = {
+    clientName: clientName,
+    clientID: clientID,
+    date: date,
+    salesman: vendedor._id,
+    totalSale: totalSale,
+    saleStatus: "En proceso",
+    saleItems: newList
+  }
 
-  // const onSubmitSale = 
+  // Const to redirect to Sales screen
+  const [error, setError] = useState();
+  const [success, setSuccess] = useState();
 
+  // Const to redirect
+  const history = useHistory();
+
+const postSale = async() => {
+  const apiResponse = await api.sales.create(newSale);
+  if (apiResponse.err) {
+    setError(apiResponse.err.message);
+    console.log(apiResponse.err);
+    } else {
+      setSuccess(apiResponse);
+      history.push("/sales");
+    }
+  }
 
   return (
     <div>
@@ -149,7 +169,6 @@ const RegisterSaleScreen = () => {
           <Table striped bordered hover size="sm">
             <thead>
                 <tr>
-                    <th>ID Producto</th>
                     <th>Producto</th>
                     <th>Precio Unitario</th>
                     <th>Cantidad</th>
@@ -159,7 +178,6 @@ const RegisterSaleScreen = () => {
             <tbody>
               {newList.map((productOnList) => (
                 <tr>
-                    <td>{productOnList.id}</td>
                     <td>{productOnList.name}</td>
                     <td className={styles.right}>${productOnList.price}</td>
                     <td className={styles.right}>{productOnList.amount}</td>
@@ -167,16 +185,16 @@ const RegisterSaleScreen = () => {
                 </tr>
               ))}
                 <tr>
-                    <td colSpan="4" className={styles.right}><h6>Valor Total</h6></td>
+                    <td colSpan="3" className={styles.right}><h6>Valor Total</h6></td>
                     <td className={styles.right}>${totalSale}</td>
                 </tr>
             </tbody>
         </Table>
         <br />
         <Row>
-          <Col sm="7"></Col>
-          <Col sm="5">
-          <Button variant="primary" >Registrar venta</Button>{' '}
+          <Col sm="8"></Col>
+          <Col sm="4">
+          <Button variant="primary" onClick={postSale}>Registrar venta</Button>{' '}
           <a href="/ventas"><Button variant="danger">Cancelar</Button>{' '}</a>
           </Col>
         </Row>

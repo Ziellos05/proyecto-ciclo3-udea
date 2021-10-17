@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { Container, Row, Col } from 'react-bootstrap';
 // import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-import api from "./components/api";
+import api from "../../api";
 
 
 const SalesScreen = () => {

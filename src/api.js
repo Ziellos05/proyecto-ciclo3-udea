@@ -18,9 +18,31 @@ const api = {
         }, 
         create(producto) {
             console.log(producto);
-            return callApi("/products", {method: "POST", body: JSON.stringify(producto),}); 
+            return callApi("/products", {
+                method: "POST", 
+                body: JSON.stringify(producto),
+            }); 
         }
-    }
+    },
+    sales: {
+        list() {
+            return callApi("/sales")
+        },
+        create(sale) {
+            return callApi("/sales", {
+                method: "POST",
+                body: JSON.stringify(sale),
+            });
+        },
+    },
+
+    users: {
+        list() {
+            return callApi("/users");
+        },
+    },
+
+
 };
 
 

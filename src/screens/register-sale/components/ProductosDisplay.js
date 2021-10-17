@@ -4,7 +4,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 // import DropdownMenu from 'react-bootstrap/DropdownMenu';
 // import DropdownToggle from 'react-bootstrap/DropdownToggle';
 // import { listaProductos } from '../../../utilities/listaProductos';
-import api from "./api";
+import api from "../../../api";
 
 
 const ProductosDisplay = ({onPressProduct}) => {
@@ -13,12 +13,12 @@ const ProductosDisplay = ({onPressProduct}) => {
   
   useEffect(() => {
     const fetchData = async () => {
-      const responseProducts = await api.products.list();
-      setProductsDB(responseProducts);
+      const response = await api.products.list();
+      setProductsDB(response);
       console.log(productsDB);
     };
     fetchData();
-  }, [])
+  }, []);
 
 
   // Set current 

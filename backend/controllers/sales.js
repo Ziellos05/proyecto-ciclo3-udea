@@ -1,9 +1,8 @@
 const Sales = require("../models/sales");
-// const NewSale = require("../models/nale");
 
 exports.getSales = (req, res) => {
     Sales.find()
-    // .populate('users')
+    // .populate("users")
     .then((salesResults)=>{
         res.status(200).json(salesResults);
     })
