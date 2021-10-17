@@ -10,7 +10,7 @@ const Vendedores = ({actualVendedor}) => {
     const onPressSalesman = (salesman) => {
         actualVendedor(salesman);
         setVendedor(salesman);
-        console.log("el vendedor es " + vendedor.name)
+        console.log(vendedor)
       }
 
       const [listaVendedores, setListaVendedores] = useState([]);

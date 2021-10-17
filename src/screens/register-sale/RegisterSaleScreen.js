@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import styles from './Styles.module.css';
 import Vendedores from './components/Vendedores';
 import ProductosDisplay from './components/ProductosDisplay';
@@ -6,6 +7,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+import api from '../../api';
 
 
 
@@ -20,9 +22,6 @@ const RegisterSaleScreen = () => {
 
   // Total price in this sale
   const [totalSale, setTotalSale] = useState(0);
-
-  // Status of sale, by default as 'En proceso' to send to database
-  const [saleStatus, setSaleStatus] = useState("En proceso");
 
   // Client state
   const [clientName, setClientName] = useState("");
@@ -55,7 +54,6 @@ const RegisterSaleScreen = () => {
       setVendedor(salesman);
     }
   
-
   // Amount of the product to push in list of products in this sale
   const [amount, setAmount] = useState("");
 
@@ -82,6 +80,35 @@ const RegisterSaleScreen = () => {
       setCurrentProduct({});
       console.log(newProduct);  
       console.log(newList);
+    }
+  }
+
+  // Sale object to post
+  const newSale = {
+    clientName: clientName,
+    clientID: clientID,
+    date: date,
+    salesman: vendedor._id,
+    totalSale: totalSale,
+    saleStatus: "En proceso",
+    saleItems: newList
+  }
+
+  // Const to redirect to Sales screen
+  const [error, setError] = useState();
+  const [success, setSuccess] = useState();
+
+  // Const to redirect
+  const history = useHistory();
+
+const postSale = async() => {
+  const apiResponse = await api.sales.create(newSale);
+  if (apiResponse.err) {
+    setError(apiResponse.err.message);
+    console.log(apiResponse.err);
+    } else {
+      setSuccess(apiResponse);
+      history.push("/sales");
     }
   }
 
@@ -167,7 +194,7 @@ const RegisterSaleScreen = () => {
         <Row>
           <Col sm="8"></Col>
           <Col sm="4">
-          <Button variant="primary" >Registrar venta</Button>{' '}
+          <Button variant="primary" onClick={postSale}>Registrar venta</Button>{' '}
           <a href="/ventas"><Button variant="danger">Cancelar</Button>{' '}</a>
           </Col>
         </Row>
