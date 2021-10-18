@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import logo from './logo.svg';
 import './App.css';
 
@@ -23,3 +24,20 @@ function App() {
 }
 
 export default App;
+=======
+import React, { useState } from 'react';
+import ContextProvider from './context/ContextProvider';
+import AppContainer from './routes/appContainer/AppContainer';
+
+
+const App = () => {
+  return (
+    <ContextProvider>
+      <AppContainer />
+    </ContextProvider>
+  );
+}
+
+
+export default App;
+>>>>>>> development
