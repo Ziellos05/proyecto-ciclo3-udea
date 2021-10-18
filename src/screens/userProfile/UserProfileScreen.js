@@ -17,7 +17,6 @@ const UserProfileScreen = () => {
       <Container>
         <Row className="mb-3">
           <Col>
-            <NewModalUser />
           </Col>
           <Col>
             <Form className="d-flex">
@@ -38,7 +37,6 @@ const UserProfileScreen = () => {
                 <tr>
                   <th>Nombre</th>
                   <th>Correo</th>
-                  <th>Estado</th>
                   <th>Rol</th>
                   <th>Acciones</th>
                 </tr>
@@ -48,7 +46,6 @@ const UserProfileScreen = () => {
                   <tr>
                     <td>{usuario.name}</td>
                     <td>{usuario.email}</td>
-                    <td>Autorizado</td>
                     <td>{usuario.rol}</td>
                     <td>
                       <ModalUser key={usuario._id} user={usuario} />
