@@ -40,3 +40,11 @@ exports.getProductInStock = (req, res) => {
         res.status(200).json(productResult);
     });
 };
+
+exports.deleteProduct = (req, res) => {
+    const id = req.params.id;
+
+    Producto.deleteOne({ _id: id}).then((productResult) => {
+        res.status(200).json("Producto eliminado");
+    });
+};
