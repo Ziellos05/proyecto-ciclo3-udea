@@ -79,17 +79,17 @@ const SalesScreen = () => {
                   <td>${venta.totalSale}</td>
                   <td>{venta.saleStatus}</td>
                   <td >
-                  <Link>
+                  <Link to={`/saleEdit/${venta._id}`}>
                     <Button variant="primary">
                       <BsFillPencilFill />
                     </Button>
                   </Link>
                   
-                  <Link>
+                  {/* <Link>
                     <Button  variant="success">
                       <BsEyeFill />
                     </Button>
-                  </Link>
+                  </Link> */}
                   </td>
                 </tr>))}
               </tbody>

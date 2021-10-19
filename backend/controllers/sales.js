@@ -27,9 +27,11 @@ exports.addSale = (req, res) => {
 };
 
 exports.getSalesOnSearch = (req, res) => {
-    Sales.find(req.params.buscar).then((findSale) => {
+    const id = req.params.id;
+
+    Sales.find({ clientID: id }).then((findSale) => {
         if(findSale) {
-            res.satus(200).json(findSale);
+            res.status(200).json(findSale);
         } else{
             res.status(404).json("Venta no encontrada");
         }

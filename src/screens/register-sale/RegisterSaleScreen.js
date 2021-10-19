@@ -104,7 +104,7 @@ const RegisterSaleScreen = () => {
     clientName: clientName,
     clientID: clientID,
     date: date,
-    salesman: vendedor._id,
+    salesman: vendedor.name,
     totalSale: totalSale,
     saleStatus: "En proceso",
     saleItems: newList
@@ -189,7 +189,7 @@ const postSale = async() => {
                     <th>Precio Unitario</th>
                     <th>Cantidad</th>
                     <th>Precio Total</th>
-                    <th>Eliminar</th>
+                    {/* <th>Eliminar</th> */}
                 </tr>
             </thead>
             <tbody>
@@ -199,7 +199,7 @@ const postSale = async() => {
                     <td className={styles.right}>${productOnList.price}</td>
                     <td className={styles.right}>{productOnList.amount}</td>
                     <td className={styles.right}>${productOnList.total}</td>
-                    <td className={styles.centerred} ><BsFillFileExcelFill onClick={() => deleteItem(productOnList.id)}/></td>
+                    {/* <td className={styles.centerred} ><BsFillFileExcelFill onClick={() => deleteItem(productOnList.id)}/></td> */}
                 </tr>
               ))}
                 <tr>
