@@ -1,9 +1,8 @@
 const Sales = require("../models/sales");
-// const NewSale = require("../models/nale");
 
 exports.getSales = (req, res) => {
     Sales.find()
-    // .populate('users')
+    // .populate("users")
     .then((salesResults)=>{
         res.status(200).json(salesResults);
     })
@@ -21,6 +20,20 @@ exports.addSale = (req, res) => {
     });
 
     sale.save().then((savedSale) => {
-        res.status(201).json("savedSale");
-    });
+        res.status(201).json("Sale saved successfully");
+    }).catch((error) => {
+        res.status(500).json({err: error});
+    })
 };
+
+exports.getSalesOnSearch = (req, res) => {
+    const id = req.params.id;
+
+    Sales.find({ clientID: id }).then((findSale) => {
+        if(findSale) {
+            res.status(200).json(findSale);
+        } else{
+            res.status(404).json("Venta no encontrada");
+        }
+    });
+}

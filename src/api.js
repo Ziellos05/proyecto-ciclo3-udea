@@ -33,7 +33,26 @@ const api = {
         getProduct(id){
             return callApi(`/products/${id}`);
         }
-    }
+    },
+    sales: {
+        list() {
+            return callApi("/sales")
+        },
+        create(sale) {
+            return callApi("/sales", {
+                method: "POST",
+                body: JSON.stringify(sale),
+            });
+        },
+    },
+
+    users: {
+        list() {
+            return callApi("/users");
+        },
+    },
+
+
 };
 
 

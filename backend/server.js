@@ -44,6 +44,11 @@ const onListening = () => {
 const port = normalizePort(process.env.PORT || "3002");
 app.set("port", port);
 
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', function(req, res) {
+  res.send('hello world');
+});
+
 const server = http.createServer(app);
 server.on("error", onError);
 server.on("listening", onListening);
