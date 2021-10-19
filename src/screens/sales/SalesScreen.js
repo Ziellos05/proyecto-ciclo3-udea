@@ -1,7 +1,9 @@
 import React, {useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import styles from './Styles.module.css';
 import Form from 'react-bootstrap/Form';
-import { Container, Row, Col } from 'react-bootstrap';
+import {BsFillPencilFill, BsEyeFill} from 'react-icons/bs';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 // import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import api from "../../api";
@@ -45,7 +47,7 @@ const SalesScreen = () => {
           <Col sm={6}>
             <Form>
               <Form.Group className={styles.inlineBlock} controlId="floatingInputGrid">
-                  <Form.Control typeof="text" placeholder={buscar || "🔍Buscar"} onChange={buscarItem}/>
+                  <Form.Control typeof="text" placeholder={buscar || "🔍Buscar por ID cliente"} onChange={buscarItem}/>
                   {/* <Button variant="success" onClick={}>Buscar</Button> */}
               </Form.Group>
             </Form>
@@ -76,7 +78,19 @@ const SalesScreen = () => {
                   <td>{venta.salesman}</td>
                   <td>${venta.totalSale}</td>
                   <td>{venta.saleStatus}</td>
-                  <td >🖊️ 👁️</td>
+                  <td >
+                  <Link to={`/saleEdit/${venta._id}`}>
+                    <Button variant="primary">
+                      <BsFillPencilFill />
+                    </Button>
+                  </Link>
+                  
+                  {/* <Link>
+                    <Button  variant="success">
+                      <BsEyeFill />
+                    </Button>
+                  </Link> */}
+                  </td>
                 </tr>))}
               </tbody>
             </Table>

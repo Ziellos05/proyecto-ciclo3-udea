@@ -4,7 +4,7 @@ const sales = mongoose.Schema({
     clientName: {type: String, required: true},
     clientID: {type: Number, required: true},
     date: {type: String, required: true},
-    salesman: {type: mongoose.Schema.Types.ObjectId, ref:"users", required: true},
+    salesman: {type: String, required: true},
     totalSale: {type: Number, required: true},
     saleStatus: {type: String, required: true},
     saleItems: {type: Array, required: true},
