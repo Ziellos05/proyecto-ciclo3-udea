@@ -27,3 +27,13 @@
 .inlineBlock {
     display: inline-block;
 }
+
+.pad1 {
+    padding: 12em;
+}
+
+.centerred{
+    color: red;
+    align-items: center;
+    text-align: center;
+}

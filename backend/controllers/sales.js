@@ -20,6 +20,18 @@ exports.addSale = (req, res) => {
     });
 
     sale.save().then((savedSale) => {
-        res.status(201).json("savedSale");
-    });
+        res.status(201).json("Sale saved successfully");
+    }).catch((error) => {
+        res.status(500).json({err: error});
+    })
 };
+
+exports.getSalesOnSearch = (req, res) => {
+    Sales.find(req.params.buscar).then((findSale) => {
+        if(findSale) {
+            res.satus(200).json(findSale);
+        } else{
+            res.status(404).json("Venta no encontrada");
+        }
+    });
+}

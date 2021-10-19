@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import {BsFillFileExcelFill} from 'react-icons/bs'
 import styles from './Styles.module.css';
 import Vendedores from './components/Vendedores';
 import ProductosDisplay from './components/ProductosDisplay';
@@ -55,10 +56,21 @@ const RegisterSaleScreen = () => {
     }
   
   // Amount of the product to push in list of products in this sale
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
 
   const onChangeAmount = (e) => {
     setAmount(e.target.value);
+  }
+
+  // Items counter for delete in sale list
+  const [itemCounter, setItemCounter] = useState(0);
+
+  // Delete item function (Delete from items list)
+  const deleteItem = (id) => {
+    console.log("elemento a borrar "+ id)
+    newList.splice(id, id);
+    console.log(newList);
+    setNewList(newList);
   }
 
   // Push the product to newList (products in sale, an array)
@@ -67,19 +79,23 @@ const RegisterSaleScreen = () => {
       alert("No se ha seleccionado un producto");
     } else if(!amount) {
       alert("No se ha introducido una cantidad para el producto");
-    } else {
+    }else if(isNaN(amount) || amount < 0) {
+      alert("Cantidad de producto no válida");
+    }else {
       const newProduct = {
         name: product.nameProduct,
         price: product.unitPrice,
         amount: amount,
         total: amount*product.unitPrice,
+        id: itemCounter,
       }
       setTotalSale(totalSale + newProduct.total);
       newList.push(newProduct);
       setAmount();
       setCurrentProduct({});
-      console.log(newProduct);  
-      console.log(newList);
+      setItemCounter(itemCounter + 1);
+      // console.log(newProduct);  
+      // console.log(newList);
     }
   }
 
@@ -108,7 +124,7 @@ const postSale = async() => {
     console.log(apiResponse.err);
     } else {
       setSuccess(apiResponse);
-      history.push("/sales");
+      history.push("/ventas");
     }
   }
 
@@ -168,11 +184,12 @@ const postSale = async() => {
         </Row>
           <Table striped bordered hover size="sm">
             <thead>
-                <tr>
+                <tr className={styles.center}>
                     <th>Producto</th>
                     <th>Precio Unitario</th>
                     <th>Cantidad</th>
                     <th>Precio Total</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -182,6 +199,7 @@ const postSale = async() => {
                     <td className={styles.right}>${productOnList.price}</td>
                     <td className={styles.right}>{productOnList.amount}</td>
                     <td className={styles.right}>${productOnList.total}</td>
+                    <td className={styles.centerred} ><BsFillFileExcelFill onClick={() => deleteItem(productOnList.id)}/></td>
                 </tr>
               ))}
                 <tr>
@@ -195,7 +213,7 @@ const postSale = async() => {
           <Col sm="8"></Col>
           <Col sm="4">
           <Button variant="primary" onClick={postSale}>Registrar venta</Button>{' '}
-          <a href="/ventas"><Button variant="danger">Cancelar</Button>{' '}</a>
+          <Link to={`/ventas`}><Button variant="danger">Cancelar</Button>{' '}</Link>
           </Col>
         </Row>
       </Container>
