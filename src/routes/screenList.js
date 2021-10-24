@@ -2,6 +2,7 @@ import HomeScreen from '../screens/home/HomeScreen';
 import LoginScreen from "../screens/login/LoginScreen";
 import ProductsScreen from "../screens/products/ProductsScreen";
 import RegisterProductsScreen from '../screens/products/RegisterProductsScreen';
+import EditProductScreen from '../screens/products/EditProductScreen';
 import SalesScreen from "../screens/sales/SalesScreen";
 import ClientIDSale from "../screens/sales/components/ClientIDSale";
 import RegisterSaleScreen from '../screens/register-sale/RegisterSaleScreen';
@@ -38,6 +39,13 @@ export const privateListScreen = [
         path: '/registrar-productos',
         component: <RegisterProductsScreen />,
         name: 'Registrar Productos',
+        //icon: <FaceIcon />,
+    },
+    {
+        id: 'Editar-Productos',
+        path: '/editar/:productId',
+        component: <EditProductScreen />,
+        name: 'Editar Productos',
         //icon: <FaceIcon />,
     },
     {

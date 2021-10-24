@@ -18,10 +18,22 @@ const api = {
         }, 
         create(producto) {
             console.log(producto);
-            return callApi("/products", {
-                method: "POST", 
+            return callApi("/products", {method: "POST", body: JSON.stringify(producto),}); 
+        },
+        delete(id){
+            return callApi(`/products/${id}`, {
+                method: "DELETE",
+            });
+        },
+        edit(producto){
+            console.log(producto);
+            return callApi(`/products/${producto._id}`, {
+                method: "PUT",
                 body: JSON.stringify(producto),
-            }); 
+            });
+        },
+        getProduct(id){
+            return callApi(`/products/${id}`);
         }
     },
     sales: {
