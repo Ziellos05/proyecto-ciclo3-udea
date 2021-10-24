@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
@@ -8,9 +8,22 @@ import Col from "react-bootstrap/Col";
 import { Container } from "react-bootstrap";
 import ModalUser from "./ModalUser";
 import NewModalUser from "./NewModalUser";
-import { listaUsuarios } from "../../utilities/listaUsuarios";
+import api from "../../api";
+// import { listaUsuarios } from "../../utilities/listaUsuarios";
 
 const UserProfileScreen = () => {
+
+  const [listaUsuarios, setListaUsuarios] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await api.users.list();
+      setListaUsuarios(response);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       <h2 className="mb-4">Maestro de usuarios</h2>
