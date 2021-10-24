@@ -41,7 +41,7 @@ export const privateListScreen = [
     },
     {
         id: 'Editar-Productos',
-        path: '/editar/:id',
+        path: '/editar/:productId',
         component: <EditProductScreen />,
         name: 'Editar Productos',
         //icon: <FaceIcon />,

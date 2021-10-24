@@ -25,9 +25,11 @@ const api = {
                 method: "DELETE",
             });
         },
-        edit(id, producto){
-            return callApi(`/editar/${id}`, {
+        edit(producto){
+            console.log(producto);
+            return callApi(`/products/${producto._id}`, {
                 method: "PUT",
+                body: JSON.stringify(producto),
             });
         },
         getProduct(id){
