@@ -26,7 +26,7 @@ const api = {
     },
     sales: {
         list() {
-            return callApi("/sales")
+            return callApi("/sales");
         },
         create(sale) {
             return callApi("/sales", {
@@ -34,6 +34,14 @@ const api = {
                 body: JSON.stringify(sale),
             });
         },
+        getSale(id) {
+            console.log(id);
+            return callApi(`/sales/${id}`)
+        },
+        byClientID(clientID) {
+            console.log(clientID);
+            return callApi(`/sales/client/${clientID}`)
+        }
     },
 
     users: {

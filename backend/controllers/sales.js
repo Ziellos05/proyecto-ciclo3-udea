@@ -2,7 +2,6 @@ const Sales = require("../models/sales");
 
 exports.getSales = (req, res) => {
     Sales.find()
-    // .populate("users")
     .then((salesResults)=>{
         res.status(200).json(salesResults);
     })
@@ -27,13 +26,28 @@ exports.addSale = (req, res) => {
 };
 
 exports.getSalesOnSearch = (req, res) => {
-    const id = req.params.id;
 
-    Sales.find({ clientID: id }).then((findSale) => {
+    console.log(req.params.id);
+
+    Sales.findById(req.params.id).then((findSale) => {
         if(findSale) {
             res.status(200).json(findSale);
         } else{
             res.status(404).json("Venta no encontrada");
         }
+    })
+};
+
+exports.getSalesByClientID = (req, res) => {
+
+    console.log(req.params.clientID);
+
+    Sales.find({clientID: req.params.clientID}).then((findSale) => {
+        if(findSale) {
+            res.status(200).json(findSale);
+        } else{
+            res.status(404).json("Ventas no encontradas");
+        }
     });
+    
 }

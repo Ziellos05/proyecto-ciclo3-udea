@@ -3,8 +3,10 @@ import LoginScreen from "../screens/login/LoginScreen";
 import ProductsScreen from "../screens/products/ProductsScreen";
 import RegisterProductsScreen from '../screens/products/RegisterProductsScreen';
 import SalesScreen from "../screens/sales/SalesScreen";
+import ClientIDSale from "../screens/sales/components/ClientIDSale";
 import RegisterSaleScreen from '../screens/register-sale/RegisterSaleScreen';
 import UserProfileScreen from "../screens/userProfile/UserProfileScreen";
+import ViewSale from "../screens/sales/components/ViewSale";
 
 export const publicListScreen = [
     {
@@ -60,3 +62,24 @@ export const privateListScreen = [
         //icon: <LocalMallIcon />,
     }
 ];
+
+export const OtherRoutes = [
+    // Edit Routes
+    {
+        id: 'EditSale',
+        path: '/sales/:id',
+        component: <ViewSale />,
+        // name: 'edit',
+        //icon: <LocalMallIcon />,
+    },
+    // Find by customer ID
+    {
+        id: 'ClientIDSale',
+        path: '/sales/client/:clientID',
+        component: <ClientIDSale />,
+        // name: 'clientSale',
+        //icon: <LocalMallIcon />,
+    }
+
+    
+]

@@ -1,10 +1,10 @@
 import React, {useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import styles from './Styles.module.css';
+import ViewSale from './components/ViewSale';
 import Form from 'react-bootstrap/Form';
 import {BsFillPencilFill, BsEyeFill} from 'react-icons/bs';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-// import Button from "react-bootstrap/Button";
+import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
 import Table from "react-bootstrap/Table";
 import api from "../../api";
 
@@ -15,42 +15,49 @@ const SalesScreen = () => {
   const [buscar, setBuscar] = useState("");
 
   const buscarItem = (e) => {
-    setBuscar(e.target.value);
-    console.log("El item a buscar " + buscar)
+      setBuscar(e.target.value);
+      console.log(buscar);
   }
 
   // Sales fetch from DB
 
   const [sales, setSales] = useState([])
-  const [users, setUsers] = useState([])
   
   useEffect(() => {
     const fetchData = async () => {
       const response = await api.sales.list();
+      console.log(response);
       setSales(response);
-      console.log(sales);
-      const responseUsers = await api.users.list();
-      setUsers(responseUsers);
-      console.log(users);
     };
 
     fetchData();
   }, []);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
   
   return (
     <div>
       <Container>
         <Row>
-          <Col sm={6}>
+          <Col className={styles.center}>
             <h2>Maestro de Ventas</h2>
           </Col>
-          <Col sm={6}>
+          <Col sm={2}>
             <Form>
               <Form.Group className={styles.inlineBlock} controlId="floatingInputGrid">
-                  <Form.Control typeof="text" placeholder={buscar || "🔍Buscar por ID cliente"} onChange={buscarItem}/>
-                  {/* <Button variant="success" onClick={}>Buscar</Button> */}
+                  <Form.Control typeof="text" placeholder={buscar || "🔍Buscar por ID cliente"} onKeyUp={buscarItem}/>
               </Form.Group>
             </Form>
+          </Col>
+          <Col sm={4}>
+            <Link to={`/sales/client/${buscar}`}>
+            <Button variant="success" onClick={buscarItem}>Buscar</Button>
+            </Link>
           </Col>
         </Row>
         <br />
@@ -78,20 +85,40 @@ const SalesScreen = () => {
                   <td>{venta.salesman}</td>
                   <td>${venta.totalSale}</td>
                   <td>{venta.saleStatus}</td>
-                  <td >
-                  <Link to={`/saleEdit/${venta._id}`}>
+                  <td>
+                  <Link to={`/sales/${venta._id}`}>
                     <Button variant="primary">
                       <BsFillPencilFill />
                     </Button>
                   </Link>
                   
-                  {/* <Link>
-                    <Button  variant="success">
+                  {/* <Button variant="success" onClick={handleShow}>
                       <BsEyeFill />
-                    </Button>
-                  </Link> */}
+                  </Button>
+                  <>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title className={styles.center}>Visor de venta</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <Container>
+                        <Row>
+                          <Col>
+                            <h5>Nombre de cliente: {venta.clientName}</h5>
+                          </Col>
+                        </Row>
+                      </Container>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                  </> */}
                   </td>
-                </tr>))}
+                </tr>
+                ))}
               </tbody>
             </Table>
           </Col>
