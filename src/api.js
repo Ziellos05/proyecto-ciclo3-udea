@@ -53,7 +53,15 @@ const api = {
         byClientID(clientID) {
             console.log(clientID);
             return callApi(`/sales/client/${clientID}`)
-        }
+        },
+        // edit(id){
+        //     console.log(id);
+        //     return callApi(`/sales/${id}`, {
+        //         method: "PUT",
+        //         body: JSON.stringify(id),
+        //     });
+        // },
+
     },
 
     users: {

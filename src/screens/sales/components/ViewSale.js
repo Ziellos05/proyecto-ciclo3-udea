@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from '../Styles.module.css';
 import Form from 'react-bootstrap/Form';
-import {BsFillPencilFill, BsEyeFill} from 'react-icons/bs';
+import {BsFillPencilFill, BsEyeFill, BsFillPersonFill, BsFillCreditCard2FrontFill, BsCalendar3WeekFill} from 'react-icons/bs';
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
 // import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
@@ -13,26 +13,37 @@ const ViewSale = () => {
 
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
-  const {id} = useParams();
-  const [sale, setSale] = useState({});
+  const { id } = useParams();
+  const [venta, setVenta] = useState({});
   const [itemsList, setItemsList] = useState([]);
   const [totalSale, setTotalSale] = useState(0);
+
+    // Vendedores state
+    const [vendedor, setVendedor] = useState("");
+  
+    const actualVendedor = (salesman) => {
+        setVendedor(salesman);
+      }
+  
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await api.sales.getSale(id);
-      console.log(response);
-      setSale(response);
-      console.log(sale);
-      setItemsList(sale.saleItems);
-      console.log(itemsList);
+      // console.log(response.saleItems);
+      setVenta(response);
+      // console.log(venta);
+      setItemsList(response.saleItems);
+      // console.log(itemsList);  
+      setVendedor(response.salesman);
+      console.log(vendedor);
     };
     fetchData();
   }, []);
 
+
   // function suma(array) {
   //   for(let i = 0; i < array.length; i++) {
-  //     setTotalSale += array.total[i];
+  //     setTotalSale += array[i].total;
   //   }
   // };
 
@@ -47,24 +58,28 @@ const ViewSale = () => {
           </Col>
         </Row>
         <br />
-        <Row>
+        <Row className={styles.center}>
           <Col>
-            <h3>Nombre de cliente:</h3>
-            <h4 className={styles.center}>{sale.clientName}</h4>
+            <h3><BsFillPersonFill /> Nombre de cliente:</h3>
+            <h4>{venta.clientName}</h4>
           </Col>
           <Col>
-            <h3>ID del cliente:</h3>
-            <h4 className={styles.center}>{sale.clientID}</h4>
+            <h3><BsFillCreditCard2FrontFill /> ID del cliente:</h3>
+            <h4>{venta.clientID}</h4>
           </Col>
           <Col>
-            <h3>Fecha de venta:</h3>
-            <h4 className={styles.center}>{sale.date}</h4>
+            <h3><BsCalendar3WeekFill />Fecha de venta:</h3>
+            <h4>{venta.date}</h4>
           </Col>
         </Row>
         <br />
+        <Row className={styles.center}>
+          <Col>
+            <Vendedores actualVendedor={actualVendedor}/>
+          </Col>
+        </Row>
         <br />
         <Row>
-          <Col>
           <Table striped bordered hover size="sm">
             <thead>
                 <tr className={styles.center}>
@@ -90,9 +105,7 @@ const ViewSale = () => {
                     <td className={styles.right}>${totalSale}</td>
                 </tr>
             </tbody>
-        </Table>
-
-          </Col>
+          </Table>
         </Row>
       </Container>
     );

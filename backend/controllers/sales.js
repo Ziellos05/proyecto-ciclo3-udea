@@ -50,4 +50,23 @@ exports.getSalesByClientID = (req, res) => {
         }
     });
     
-}
+};
+
+exports.editSale = (req, res) => {
+    const id = req.params.id;
+
+    const saleUpd = new Sales({
+        _id: id,
+        clientName: req.body.clientName,
+        clientID: req.body.clientID,
+        date: req.body.date,
+        salesman: req.body.salesman,
+        totalSale: req.body.totalSale,
+        saleStatus: req.body.saleStatus,
+        saleItems: req.body.saleItems,
+    });
+
+    Sales.findByIdAndUpdate(id, saleUpd).then((savedSale) => {
+        res.status(200).json("Sale updated successfully");
+    });
+};
