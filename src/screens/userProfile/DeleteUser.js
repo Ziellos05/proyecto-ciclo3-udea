@@ -78,8 +78,8 @@ function NewModalUser() {
 
   return (
     <>
-      <Button variant="primary" onClick={() => setModalShow(true)}>
-        Crear Usuario
+      <Button variant="danger" onClick={() => setModalShow(true)}>
+        Borrar
       </Button>{" "}
 
       <MyVerticallyCenteredModal
