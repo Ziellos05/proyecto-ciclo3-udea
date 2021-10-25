@@ -1,21 +1,21 @@
 import React, {useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import styles from '../Styles.module.css';
-import Form from 'react-bootstrap/Form';
-import {BsFillPencilFill, BsEyeFill} from 'react-icons/bs';
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
-// import Button from "react-bootstrap/Button";
-// import Table from "react-bootstrap/Table";
+import {BsFillPencilFill} from 'react-icons/bs';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import Table from "react-bootstrap/Table";
 import api from "../../../api";
 
 const ClientIDSale = () => {
 
-  const [sale, setSale] = useState({});
+  const {clientID} = useParams();
+  const [sales, setSales] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await api.sales.byClientID();
+      const response = await api.sales.byClientID(clientID);
       console.log(response);
-      setSale(response);
+      setSales(response);
     };
 
     fetchData();
@@ -31,22 +31,47 @@ const ClientIDSale = () => {
     
     return(
       <Container>
-  	    <Row>
+        <Row>
           <Col className={styles.center}>
-            <h2>Editar venta</h2>
+            <h2>Búsqueda de ventas por ID de cliente</h2>
           </Col>
         </Row>
-        <Row>
+        <br />
+  	    <Row>
           <Col>
-          <Form>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Nombre de cliente</Form.Label>
-                <Form.Control type="text" placeholder={clientName || "Nombre de cliente"} onChange={onChangeName}/>
-              </Form.Group>
-            </Form>
-          </Col>
-          <Col>
+            <Table striped bordered hover size="sm" className={styles.center}>
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>ID Cliente</th>
+                  <th>Cliente</th>
+                  <th>Vendedor</th>
+                  <th>Total Venta</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              {sales.map((venta) => 
+                (<tr>
+                  <td>{venta.date}</td>
+                  <td>{venta.clientID}</td>
+                  <td>{venta.clientName}</td>
+                  <td>{venta.salesman}</td>
+                  <td>${venta.totalSale}</td>
+                  <td>{venta.saleStatus}</td>
+                  <td>
+                  <Link to={`/sales/${venta._id}`}>
+                    <Button variant="primary">
+                      <BsFillPencilFill />
+                    </Button>
+                  </Link>
+                  </td>
+                </tr>
+                ))}
 
+              </tbody>
+            </Table>
           </Col>
         </Row>
       </Container>

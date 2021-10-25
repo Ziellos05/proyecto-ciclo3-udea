@@ -16,7 +16,7 @@ const RegisterSaleScreen = () => {
 
   // Date
   const current = new Date();
-  const date = `${current.getDate()}/${current.getMonth()}/${current.getFullYear()}`;
+  const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
   // Array that contains selected products in this sale
   const [newList, setNewList] = useState([]);
@@ -136,7 +136,7 @@ const postSale = async() => {
         </Row> 
         <br />
         <Row>
-        <Col className={styles.center}><spam>FECHA DE VENTA: {date}</spam></Col>
+        <Col className={styles.center}><spam>FECHA DE VENTA: {date} </spam></Col>
         </Row>
         <br />
         <Row>

@@ -1,10 +1,9 @@
 import React, {useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import styles from './Styles.module.css';
-import ViewSale from './components/ViewSale';
 import Form from 'react-bootstrap/Form';
-import {BsFillPencilFill, BsEyeFill} from 'react-icons/bs';
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
+import {BsFillPencilFill} from 'react-icons/bs';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import Table from "react-bootstrap/Table";
 import api from "../../api";
 
@@ -32,13 +31,6 @@ const SalesScreen = () => {
 
     fetchData();
   }, []);
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-
   
   return (
     <div>
@@ -86,36 +78,11 @@ const SalesScreen = () => {
                   <td>${venta.totalSale}</td>
                   <td>{venta.saleStatus}</td>
                   <td>
-                  <Link to={`/sales/${venta._id}`}>
-                    <Button variant="primary">
-                      <BsFillPencilFill />
-                    </Button>
-                  </Link>
-                  
-                  {/* <Button variant="success" onClick={handleShow}>
-                      <BsEyeFill />
-                  </Button>
-                  <>
-                  <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                      <Modal.Title className={styles.center}>Visor de venta</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <Container>
-                        <Row>
-                          <Col>
-                            <h5>Nombre de cliente: {venta.clientName}</h5>
-                          </Col>
-                        </Row>
-                      </Container>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
-                        Close
+                    <Link to={`/sales/${venta._id}`}>
+                      <Button variant="primary">
+                        <BsFillPencilFill />
                       </Button>
-                    </Modal.Footer>
-                  </Modal>
-                  </> */}
+                    </Link>
                   </td>
                 </tr>
                 ))}

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const sales = mongoose.Schema({
-    // _id: mongoose.ObjectID,
+    // _id: {type: String},
     clientName: {type: String, required: true},
     clientID: {type: Number, required: true},
     date: {type: String, required: true},
