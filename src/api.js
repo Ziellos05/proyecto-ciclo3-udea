@@ -14,32 +14,6 @@ const api = {
     list() {
       return callApi("/products");
     },
-    sales: {
-        list() {
-            return callApi("/sales");
-        },
-        create(sale) {
-            return callApi("/sales", {
-                method: "POST",
-                body: JSON.stringify(sale),
-            });
-        },
-        getSale(id) {
-            console.log(id);
-            return callApi(`/sales/${id}`)
-        },
-        byClientID(clientID) {
-            console.log(clientID);
-            return callApi(`/sales/client/${clientID}`)
-        },
-        // edit(id){
-        //     console.log(id);
-        //     return callApi(`/sales/${id}`, {
-        //         method: "PUT",
-        //         body: JSON.stringify(id),
-        //     });
-        // },
-
     create(producto) {
       console.log(producto);
       return callApi("/products", {
@@ -63,43 +37,59 @@ const api = {
       return callApi(`/products/${id}`);
     },
   },
-  sales: {
-    list() {
-      return callApi("/sales");
-    },
-    create(sale) {
-      return callApi("/sales", {
-        method: "POST",
-        body: JSON.stringify(sale),
-      });
-    },
-  },
+    sales: {
+      list() {
+        return callApi("/sales");
+      },
+      create(sale) {
+        return callApi("/sales", {
+          method: "POST",
+          body: JSON.stringify(sale),
+        });
+      },
+      getSale(id) {
+        console.log(id);
+        return callApi(`/sales/${id}`);
+      },
+      byClientID(clientID) {
+        console.log(clientID);
+        return callApi(`/sales/client/${clientID}`);
+      },
+      // edit(id){
+      //     console.log(id);
+      //     return callApi(`/sales/${id}`, {
+      //         method: "PUT",
+      //         body: JSON.stringify(id),
+      //     });
+      // },
 
-  users: {
-    list() {
-      return callApi("/users");
     },
-    create(user) {
-      return callApi("/users", {
-        method: "POST",
-        body: JSON.stringify(user),
-      });
+
+    users: {
+      list() {
+        return callApi("/users");
+      },
+      create(user) {
+        return callApi("/users", {
+          method: "POST",
+          body: JSON.stringify(user),
+        });
+      },
+      delete(email) {
+        return callApi(`/users/${email}`, {
+          method: "DELETE",
+        });
+      },
+      edit(user, rol) {
+        return callApi(`/users/${user.email}`, {
+          method: "PUT",
+          body: JSON.stringify(rol),
+        });
+      },
+      getUser(email) {
+        return callApi(`/users/${email}`);
+      },
     },
-    delete(email) {
-      return callApi(`/users/${email}`, {
-        method: "DELETE",
-      });
-    },
-    edit(user, rol) {
-      return callApi(`/users/${user.email}`, {
-        method: "PUT",
-        body: JSON.stringify(rol),
-      });
-    },
-    getUser(email) {
-      return callApi(`/users/${email}`);
-    },
-  },
 };
 
 export default api;
