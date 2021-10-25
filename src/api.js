@@ -14,6 +14,32 @@ const api = {
     list() {
       return callApi("/products");
     },
+    sales: {
+        list() {
+            return callApi("/sales");
+        },
+        create(sale) {
+            return callApi("/sales", {
+                method: "POST",
+                body: JSON.stringify(sale),
+            });
+        },
+        getSale(id) {
+            console.log(id);
+            return callApi(`/sales/${id}`)
+        },
+        byClientID(clientID) {
+            console.log(clientID);
+            return callApi(`/sales/client/${clientID}`)
+        },
+        // edit(id){
+        //     console.log(id);
+        //     return callApi(`/sales/${id}`, {
+        //         method: "PUT",
+        //         body: JSON.stringify(id),
+        //     });
+        // },
+
     create(producto) {
       console.log(producto);
       return callApi("/products", {
