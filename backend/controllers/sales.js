@@ -2,7 +2,6 @@ const Sales = require("../models/sales");
 
 exports.getSales = (req, res) => {
     Sales.find()
-    // .populate("users")
     .then((salesResults)=>{
         res.status(200).json(salesResults);
     })
@@ -27,13 +26,47 @@ exports.addSale = (req, res) => {
 };
 
 exports.getSalesOnSearch = (req, res) => {
-    const id = req.params.id;
 
-    Sales.find({ clientID: id }).then((findSale) => {
+    console.log(req.params.id);
+
+    Sales.findById(req.params.id).then((findSale) => {
         if(findSale) {
             res.status(200).json(findSale);
         } else{
             res.status(404).json("Venta no encontrada");
         }
+    })
+};
+
+exports.getSalesByClientID = (req, res) => {
+
+    console.log(req.params.clientID);
+
+    Sales.find({clientID: req.params.clientID}).then((findSale) => {
+        if(findSale) {
+            res.status(200).json(findSale);
+        } else{
+            res.status(404).json("Ventas no encontradas");
+        }
     });
-}
+    
+};
+
+exports.editSale = (req, res) => {
+    const id = req.params.id;
+
+    const saleUpd = new Sales({
+        _id: id,
+        clientName: req.body.clientName,
+        clientID: req.body.clientID,
+        date: req.body.date,
+        salesman: req.body.salesman,
+        totalSale: req.body.totalSale,
+        saleStatus: req.body.saleStatus,
+        saleItems: req.body.saleItems,
+    });
+
+    Sales.findByIdAndUpdate(id, saleUpd).then((savedSale) => {
+        res.status(200).json("Sale updated successfully");
+    });
+};
