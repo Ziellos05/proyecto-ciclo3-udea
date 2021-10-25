@@ -66,3 +66,13 @@ exports.editProduct = (req, res) => {
       res.status(200).json("El producto se actualizó satisfactoriamente");
     });
   };
+
+
+  exports.findProduct = (req, res) => {
+    const nameProduct = req.params.nameProduct;
+
+    Producto.find({nameProduct: { $regex: ".*" + nameProduct + ".*" } })
+    .then((products) => {
+        res.status(200).json(products);
+    });
+}

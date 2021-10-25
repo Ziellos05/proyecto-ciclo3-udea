@@ -30,8 +30,7 @@ const EditProductScreen = ({producto, setProducts}) => {
           setNewProduct(response);
       };
       fetchData();
-  }, []
-  
+  }, [productId]
   );
 
   const handleChange = (event) => {
@@ -47,7 +46,7 @@ const EditProductScreen = ({producto, setProducts}) => {
       console.log(apiResponse.err);
     } else {
       setSuccess(apiResponse);
-      setProducts([...producto, newProduct]);
+      //setProducts([...producto, newProduct]);
       //history.push("/productos");
     }   
     };

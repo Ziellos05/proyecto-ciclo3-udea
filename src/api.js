@@ -34,7 +34,11 @@ const api = {
         },
         getProduct(id){
             return callApi(`/products/${id}`);
-        }
+        },
+        
+        find(nameProduct){
+            return callApi(`/products/${nameProduct}`);
+        },
     },
     sales: {
         list() {

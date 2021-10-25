@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { Container, Table, Button } from 'react-bootstrap';
+import { Container, Table, Button, Row, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import Busqueda from './components/Busqueda';
 import api from "../../api";
 
 
@@ -27,6 +28,11 @@ const ProductsScreen = ({producto}) => {
   <div>
       <h1 className="text-center mt-5 mb-5">Maestro de Productos</h1>
       <Container>
+      <Row className="mb-3">
+          <Col xs={4}>
+            <Busqueda productos={productos} setProductos={setProductos} />
+          </Col>
+        </Row>
         <Table striped bordered hover>
           <thead>
             <tr>
