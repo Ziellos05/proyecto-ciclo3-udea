@@ -53,20 +53,20 @@ const api = {
         });
       },
       getSale(id) {
-        console.log(id);
+        // console.log(id);
         return callApi(`/sales/${id}`);
       },
       byClientID(clientID) {
         console.log(clientID);
         return callApi(`/sales/client/${clientID}`);
       },
-      // edit(id){
-      //     console.log(id);
-      //     return callApi(`/sales/${id}`, {
-      //         method: "PUT",
-      //         body: JSON.stringify(id),
-      //     });
-      // },
+      edit(saleUpd){
+          console.log(saleUpd);
+          return callApi(`/sales/${saleUpd._id}`, {
+              method: "PUT",
+              body: JSON.stringify(saleUpd),
+          });
+      },
 
     },
 

@@ -54,6 +54,7 @@ exports.getSalesByClientID = (req, res) => {
 
 exports.editSale = (req, res) => {
     const id = req.params.id;
+    console.log(id);
 
     const saleUpd = new Sales({
         _id: id,
