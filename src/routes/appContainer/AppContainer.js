@@ -8,6 +8,7 @@ import styles from './Styles.module.css';
 const AppContainer = () => {
 
     const { authState, setAuthState, user, setUser } = useContext(AppContext);
+    console.log(user);
     
     return (
         <>

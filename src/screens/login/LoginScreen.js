@@ -37,7 +37,7 @@ const LoginScreen = () => {
     } catch (error) {
       console.error(error);
       alert('Ups!, something went wrong');
-    }      
+    }
   };
 
   // useEffect(() => {
@@ -58,7 +58,7 @@ const LoginScreen = () => {
     console.log(response);
     const loggedUserEmail = response.profileObj?.email || '';
     const userList = await fetchUsersData();
-    
+
     let userRole = INVITADO;
 
     for (const user of userList) {
@@ -70,9 +70,19 @@ const LoginScreen = () => {
     };
 
 
-
-    setAuthState({ type: 'LOG_IN', payload: true });
-    setUser({ type: 'LOG_IN', payload: { name: response.profileObj?.name || 'Anónimo', email: loggedUserEmail, role: userRole, userList } });
+    setUser({
+      type: 'LOG_IN',
+      payload: {
+        name: response.profileObj?.name || 'Anónimo',
+        email: loggedUserEmail,
+        role: userRole,
+        userList: userList
+      }
+    });
+     setTimeout(() => {
+      setAuthState({ type: 'LOG_IN', payload: true });
+     }, 500)
+    
   };
 
   const onFailureLogIn = (response) => {

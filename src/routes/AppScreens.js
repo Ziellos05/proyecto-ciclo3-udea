@@ -6,8 +6,7 @@ import { publicListScreen, privateListScreen, OtherRoutes } from "./screenList";
 const AppScreens = ({ authState, user }) => {
 
     const location = useLocation();
-    const { isLoggedIn } = authState;
-
+    const { isLoggedIn } = authState;    
     return (
         <>
             <Switch>
@@ -20,9 +19,10 @@ const AppScreens = ({ authState, user }) => {
                 }
                 {
                     privateListScreen.map((screen) => {
-                        if (!screen.roles.includes(user.role)) {
-                            return () => <></>;
-                        }
+                        // const array = screen.roles;
+                        // if (!array.includes(user.role)) {
+                        //     return <></>;
+                        // }
                         return (
                             <Route exact path={screen.path} key={screen.id}>
                                 {

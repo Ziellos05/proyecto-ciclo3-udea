@@ -8,6 +8,6 @@ export const authUser = {
 export const userInfo = {
     name: '',
     email: '',
-    role: '',
+    role: 'INVITADO',
     userList: [], 
 };

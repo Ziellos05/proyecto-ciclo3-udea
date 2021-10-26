@@ -15,8 +15,7 @@ export const publicListScreen = [
         id: 'Registro',
         path: '/',
         component: <LoginScreen />,
-        name: 'Registro',
-        roles: [INVITADO, VENDEDOR, ADMINISTRADOR]
+        name: 'Registro',        
         //icon: <HomeIcon />,
     },
 ];
