@@ -37,6 +37,8 @@ const ViewSale = () => {
 
   }
 
+  const history = useHistory();
+
   const handleClick = async() => {
     console.log(saleUpd);
     const apiResponse = await api.sales.edit(saleUpd);
@@ -44,6 +46,7 @@ const ViewSale = () => {
       setError(apiResponse.err.message);
     } else {
       setSuccess(apiResponse);
+      history.push("/ventas");
     }
   }
 
