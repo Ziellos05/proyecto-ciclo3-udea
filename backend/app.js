@@ -1,7 +1,8 @@
 var express = require("express");
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 const cors = require("cors");
 var app = express();
+require("dotenv").config();
 
 const productsRoutes = require("./routes/products");
 const usersRoutes = require("./routes/users");
@@ -12,11 +13,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 //TODO add string to connect to db
-mongoose.connect(
-    "mongodb+srv://waalvarex:fmI9GIbIdQs7uuDo@cluster0.lkuo7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    .then(() => {
-        console.log('Connected to DB!, running in local port 3002')
-    });
+mongoose.connect(process.env.MONGODB_REACTIVOS).then(() => {
+  console.log("Connected to DB!, running in local port 3002");
+});
 
 // Aquí concateno la ruta para los APIs en general
 
