@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { listaVendedores } from '../../../utilities/listaVendedores';
 import api from "../../../api";
 import {DropdownButton, Dropdown} from 'react-bootstrap';
 

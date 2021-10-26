@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import {BsFillFileExcelFill} from 'react-icons/bs'
+// import {BsFillFileExcelFill} from 'react-icons/bs'
 import styles from './Styles.module.css';
 import Vendedores from './components/Vendedores';
 import ProductosDisplay from './components/ProductosDisplay';
