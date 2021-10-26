@@ -2,12 +2,23 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { listaUsuarios } from "../../utilities/listaUsuarios";
+import api from "../../api";
+import { Link } from 'react-router-dom';
 
 function MyVerticallyCenteredModal(props) {
   const user = props.user;
+
+  const [newRol, setNewRol] = React.useState({ rol: "" });
+
+  const handleChange = (event) => {
+    setNewRol({ ...newRol, [event.target.name]: event.target.value });
+  };
+
+  const handleClick = async () => {
+    const apiResponse = await api.users.edit(user, newRol);
+    console.log(apiResponse);
+  };
+
   return (
     <Modal
       {...props}
@@ -24,24 +35,31 @@ function MyVerticallyCenteredModal(props) {
         <Modal.Body>
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Nombre</Form.Label>
-            <Form.Control type="text" placeholder={user.name} disabled/>
+            <Form.Control type="text" placeholder={user.name} disabled />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Correo</Form.Label>
-            <Form.Control type="email" placeholder={user.email} disabled/>
+            <Form.Control type="email" placeholder={user.email} disabled />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Select aria-label="Default select example">
+            <Form.Select
+              aria-label="Default select example"
+              name="rol"
+              onChange={handleChange}
+              value={newRol.rol}
+            >
               <option>{user.rol}</option>
-              <option value="1">Vendedor</option>
-              <option value="2">Administrador</option>
+              <option value="Vendedor">Vendedor</option>
+              <option value="Administrador">Administrador</option>
             </Form.Select>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit">
-            Save changes
-          </Button>
+          <Link to={`/Inicio`}>
+            <Button variant="primary" onClick={handleClick}>
+              Save changes
+            </Button>{" "}
+          </Link>
         </Modal.Footer>
       </Form>
     </Modal>
@@ -49,11 +67,11 @@ function MyVerticallyCenteredModal(props) {
 }
 
 function ModalUser({ user }) {
-  const [modalShow, setModalShow] = React.useState(false);  
+  const [modalShow, setModalShow] = React.useState(false);
 
   return (
     <>
-      <Button variant="link" onClick={() => setModalShow(true)}>
+      <Button variant="primary" onClick={() => setModalShow(true)}>
         Editar
       </Button>
 

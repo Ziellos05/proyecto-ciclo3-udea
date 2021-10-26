@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { Container, Table, Button } from 'react-bootstrap';
+import { Container, Table, Button, Row, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import Busqueda from './components/Busqueda';
 import api from "../../api";
 
 
@@ -17,10 +18,21 @@ const ProductsScreen = ({producto}) => {
     fetchData();
   }, []);
 
+  const deleteProduct = (event) => {
+    const response = api.products.delete(event.target.id);
+    console.log(response);
+
+  };
+
   return (
   <div>
       <h1 className="text-center mt-5 mb-5">Maestro de Productos</h1>
       <Container>
+      <Row className="mb-3">
+          <Col xs={4}>
+            <Busqueda productos={productos} setProductos={setProductos} />
+          </Col>
+        </Row>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -42,7 +54,7 @@ const ProductsScreen = ({producto}) => {
                   <td>{producto.description}</td>
                   <td>{producto.statusProduct.toString()}</td>
                   <td>
-                    <Link to={`/Gestion/Edit/${producto._id}`}>
+                    <Link to={`/editar/${producto._id}`}>
                       <Button variant="primary">  
                       <svg xmlns="http://www.w3.org/2000/svg" 
                       width="18" 
@@ -57,18 +69,10 @@ const ProductsScreen = ({producto}) => {
 
                     <Button
                       variant="danger"
-                      //onClick={deleteProduct}
+                      onClick={deleteProduct}
                       id={producto._id}
-                      className="ms-2"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" 
-                      width="18" 
-                      height="18" 
-                      fill="currentColor" 
-                      className="bi bi-trash-fill" 
-                      viewBox="0 0 16 16">
-                      <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                      </svg>
+                      className="ms-2">
+                      BORRAR
                     </Button>
                   </td>
                 </tr>
