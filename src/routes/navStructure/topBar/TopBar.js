@@ -22,8 +22,11 @@ const TopBar = ({ user }) => {
                     {/* <Navbar.Brand href="#home">Los REACTivos</Navbar.Brand> */}
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
+                        <Navbar.Text style={{marginRight: 20}} >
+                            Registrado como: <a href="#login">{user.name || 'Invitado'}</a>
+                        </Navbar.Text>
                         <Navbar.Text>
-                            Registrado como: <a href="#login">{user.name}</a>
+                            Tu Rol: <a href="#login">{user.role || 'Invitado'}</a>
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Container>

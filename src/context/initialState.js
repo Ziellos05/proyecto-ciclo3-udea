@@ -2,10 +2,12 @@
 export const authUser = {
     isLoggedIn: false,
     isLoading: true,
-    isOffline: false 
+    isOffline: false,
 };
 
 export const userInfo = {
     name: '',
     email: '',
+    role: '',
+    userList: [], 
 };

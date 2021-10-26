@@ -47,6 +47,9 @@ const NavStructure = ({ setAuthState, user, setUser }) => {
           <ListGroup>
             {
               privateListScreen.map((screen) => {
+                if (!screen.roles.includes(user.role)) {
+                  return () => <></>;
+                }
                 return (
                   <ListGroup.Item
                     action

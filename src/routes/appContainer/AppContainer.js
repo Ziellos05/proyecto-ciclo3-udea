@@ -17,7 +17,7 @@ const AppContainer = () => {
                         authState.isLoggedIn && <NavStructure setAuthState={setAuthState} user={user} setUser={setUser} />
                     }                    
                     <div className={styles.container}>                        
-                        <AppScreens authState={authState} />
+                        <AppScreens authState={authState} user={user} />
                     </div>
                 </div>
             </Router>

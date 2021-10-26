@@ -5,6 +5,7 @@ import RegisterProductsScreen from '../screens/products/RegisterProductsScreen';
 import SalesScreen from "../screens/sales/SalesScreen";
 import RegisterSaleScreen from '../screens/register-sale/RegisterSaleScreen';
 import UserProfileScreen from "../screens/userProfile/UserProfileScreen";
+import { INVITADO, VENDEDOR, ADMINISTRADOR } from '../screens/login/constants';
 
 export const publicListScreen = [
     {
@@ -12,6 +13,7 @@ export const publicListScreen = [
         path: '/',
         component: <LoginScreen />,
         name: 'Registro',
+        roles: [INVITADO, VENDEDOR, ADMINISTRADOR]
         //icon: <HomeIcon />,
     },
 ];
@@ -22,6 +24,7 @@ export const privateListScreen = [
         path: '/inicio',
         component: <HomeScreen />,
         name: 'Inicio',
+        roles: [INVITADO, VENDEDOR, ADMINISTRADOR]
         //icon: <HomeIcon />,
     },
     {
@@ -29,6 +32,7 @@ export const privateListScreen = [
         path: '/productos',
         component: <ProductsScreen />,
         name: 'Productos',
+        roles: [VENDEDOR, ADMINISTRADOR]
         //icon: <FaceIcon />,
     },
     {
@@ -36,6 +40,7 @@ export const privateListScreen = [
         path: '/registrar-productos',
         component: <RegisterProductsScreen />,
         name: 'Registrar Productos',
+        roles: [VENDEDOR, ADMINISTRADOR]
         //icon: <FaceIcon />,
     },
     {
@@ -43,6 +48,7 @@ export const privateListScreen = [
         path: '/ventas',
         component: <SalesScreen />,
         name: 'Ventas',
+        roles: [VENDEDOR, ADMINISTRADOR]
         //icon: <MenuBookIcon />,
     },
     {
@@ -50,6 +56,7 @@ export const privateListScreen = [
         path: '/registrar-venta',
         component: <RegisterSaleScreen />,
         name: 'Registrar Venta',
+        roles: [VENDEDOR, ADMINISTRADOR]
         //icon: <MenuBookIcon />,
     },
     {
@@ -57,6 +64,7 @@ export const privateListScreen = [
         path: '/perfil',
         component: <UserProfileScreen />,
         name: 'Perfil',
+        roles: [ADMINISTRADOR]
         //icon: <LocalMallIcon />,
     }
 ];

@@ -26,8 +26,8 @@ export const AuthUser = (state, action) => {
 export const userInfo = (state, action) => {
     
     const setUserInfo = () => {
-        const { name, email } = action.payload;
-        return { ...state, name: name, email: email };
+        const { name, email, role, userList} = action.payload;
+        return { ...state, name, email, role, userList };
     };
 
     const cleanUserInfo = () => {

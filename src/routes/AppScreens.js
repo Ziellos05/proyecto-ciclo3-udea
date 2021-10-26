@@ -3,7 +3,7 @@ import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { publicListScreen, privateListScreen } from "./screenList";
 
 
-const AppScreens = ({ authState }) => {
+const AppScreens = ({ authState, user }) => {
 
     const location = useLocation();
     const { isLoggedIn } = authState;
@@ -19,20 +19,25 @@ const AppScreens = ({ authState }) => {
                     ))
                 }
                 {
-                    privateListScreen.map((screen) => (
-                        <Route exact path={screen.path} key={screen.id}>
-                            {
-                                isLoggedIn ? 
-                                    screen.component : 
-                                    <Redirect 
-                                        to={{
-                                            pathname: "/",
-                                            state: { from: location }
-                                        }} 
-                                    />
-                            }
-                        </Route>
-                    ))
+                    privateListScreen.map((screen) => {
+                        if (!screen.roles.includes(user.role)) {
+                            return () => <></>;
+                        }
+                        return (
+                            <Route exact path={screen.path} key={screen.id}>
+                                {
+                                    isLoggedIn ?
+                                        screen.component :
+                                        <Redirect
+                                            to={{
+                                                pathname: "/",
+                                                state: { from: location }
+                                            }}
+                                        />
+                                }
+                            </Route>
+                        )
+                    })
                 }
             </Switch>
         </>
