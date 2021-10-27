@@ -47,10 +47,10 @@ const NavStructure = ({ setAuthState, user, setUser }) => {
           <ListGroup>
             {
               privateListScreen.map((screen) => {
-                const arrayList = screen.roles || [];
-                if (!arrayList.includes(user.role)) {
-                  return () => <></>;
-                }
+                // const arrayList = screen.roles || [];
+                // if (!arrayList.includes(user.role)) {
+                //   return () => <></>;
+                // }
                 return (
                   <ListGroup.Item
                     action

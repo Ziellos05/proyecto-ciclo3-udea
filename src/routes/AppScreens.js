@@ -19,10 +19,10 @@ const AppScreens = ({ authState, user }) => {
                 }
                 {
                     privateListScreen.map((screen) => {
-                        const arrayList = screen.roles || [];
-                        if (!arrayList.includes(user.role)) {
-                            return <></>;
-                        }
+                        // const arrayList = screen.roles || [];
+                        // if (!arrayList.includes(user.role)) {
+                        //     return <></>;
+                        // }
                         return (
                             <Route exact path={screen.path} key={screen.id}>
                                 {
