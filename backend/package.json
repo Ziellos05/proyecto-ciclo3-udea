@@ -1,0 +1,24 @@
+{
+  "name": "reactivos-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "npm install && npm run build",
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "materialize-css": "^1.0.0-rc.2",
+    "mongoose": "^6.0.10",
+    "mongoose-unique-validator": "^3.0.0",
+    "nodemon": "^2.0.14",
+    "update": "^0.7.4"
+  }
+}
