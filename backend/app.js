@@ -13,7 +13,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 //TODO add string to connect to db
-mongoose.connect(process.env.MONGODB_REACTIVOS).then(() => {
+
+const uri = "mongodb+srv://superventas:superventas@cluster0.m0rdh.mongodb.net/?retryWrites=true&w=majority";
+//mongoose.connect(process.env.MONGODB_REACTIVOS).then(() => {
+mongoose.connect(uri).then(() => {
   console.log("Connected to DB!, running in local port 3002");
 });
 
